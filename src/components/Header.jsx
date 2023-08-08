@@ -2,48 +2,49 @@ import React from 'react';
 import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person } from 'react-ionicons'
 import styled from 'styled-components';
+import SideBar from './SideBar';
 
 export default function Header() {
-    const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
+    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
   
-    const handleLogoClick = () => {
+    const handlePersonClick = () => {
         setTelaAcesso(!telaAcesso);
     }
     const handleMenuClick = () => {
-        setLogado(!logado)
+        setIsOpen(!isOpen)
     }
+
   
     return (
         <>
             <HeaderContainer>
-            <DivLogo className="shadow-drop-bottom">
-                <span >Get Samurais</span>
-                <SecEsquerda>
-                    {!telaAcesso ? <Menu 
-                                        className="iconHeader"
-                                        onClick={handleMenuClick} 
-                                        height="30px" width="30px" 
-                                        color={`#FFF4F4`}
-                                    /> : 
-                                    <ArrowBack 
-                                        className="iconHeader" 
-                                        onClick={handleLogoClick} 
-                                        height="30px" width="30px"
-                                        color={`#FFF4F4`}
-                                    />
-                    }
-                </SecEsquerda>
-                <SecDireita>
-                    {!telaAcesso 
-                        ? <Person 
-                            onClick={handleLogoClick} 
-                            className="iconHeader" 
-                            height="30px" width="30px" 
-                            color={`#FFF4F4`}
-                        /> : null }
-                </SecDireita>
-            </DivLogo>
-            </HeaderContainer>
+                <SideBar />
+                <DivLogo className="shadow-drop-bottom">
+                    <span >Get Samurais</span>
+                    <SecEsquerda>
+                        {!telaAcesso ? <Menu 
+                                            onClick={handleMenuClick} 
+                                            height="30px" width="30px" 
+                                            color={`#FFF4F4`}
+                                        /> : 
+                                        <ArrowBack 
+                                            onClick={handlePersonClick} 
+                                            height="30px" width="30px"
+                                            color={`#FFF4F4`}
+                                        />
+                        }
+                    </SecEsquerda>
+                    <SecDireita>
+                        {!telaAcesso 
+                            ? <Person 
+                                onClick={handlePersonClick} 
+                                className="iconHeader" 
+                                height="30px" width="30px" 
+                                color={`#FFF4F4`}
+                            /> : null }
+                    </SecDireita>
+                </DivLogo>
+                </HeaderContainer>
             <BordaInferior></BordaInferior>
         </>
     );
