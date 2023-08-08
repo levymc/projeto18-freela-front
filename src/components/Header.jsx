@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
+
+    const navigateTo = useLocation()
   
     const handlePersonClick = () => {
+        setTelaAcesso(!telaAcesso);
+    }
+    const handleLogoClick = () => {
         setTelaAcesso(!telaAcesso);
     }
     const handleMenuClick = () => {
@@ -20,9 +26,9 @@ export default function Header() {
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <span >Get Samurais</span>
+                    <Link to="/">Get Samurais</Link>
                     <SecEsquerda>
-                        {!telaAcesso ? <Menu 
+                        {!telaAcesso ? <MenuIcon 
                                             onClick={handleMenuClick} 
                                             height="30px" width="30px" 
                                             color={`#FFF4F4`}
@@ -36,12 +42,13 @@ export default function Header() {
                     </SecEsquerda>
                     <SecDireita>
                         {!telaAcesso 
-                            ? <Person 
-                                onClick={handlePersonClick} 
-                                className="iconHeader" 
-                                height="30px" width="30px" 
-                                color={`#FFF4F4`}
-                            /> : null }
+                            ? <StyledLink to="/login">
+                                <Person 
+                                    className="iconHeader" 
+                                    height="30px" width="30px" 
+                                    color={`#FFF4F4`}
+                                />
+                                </StyledLink> : null }
                     </SecDireita>
                 </DivLogo>
                 </HeaderContainer>
@@ -49,6 +56,16 @@ export default function Header() {
         </>
     );
 }
+
+const StyledLink = styled(Link)`
+    text-decoration: none; /* Remover sublinhado */
+    color: inherit !important; /* Herdar cor do texto do pai */
+    cursor: pointer; /* Mostrar cursor de clique */
+`;
+
+const MenuIcon = styled(Menu)`
+        cursor: pointer;
+`
 
 const HeaderContainer = styled.div`
     height: 10vh;
@@ -79,8 +96,8 @@ const SecDireita = styled.section`
     right: 3vw;
     font-size: 30px;
     display: flex;
-    color:RGB(250, 250, 251);
     align-items: center;
+    color:RGB(250, 250, 251);
 `
 
 const DivLogo = styled.div`
