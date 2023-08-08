@@ -11,59 +11,36 @@ export default function Home() {
 	return (
 		<Div height={'100vh'}>
 			<Body>
-				{telaAcesso ? (
-					<Form>
-						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Label>Email address</Form.Label>
-							<Form.Control type="email" placeholder="Enter email" />
-							<Form.Text className="text-muted">
-								We'll never share your email with anyone else.
-							</Form.Text>
-							</Form.Group>
-					
-							<Form.Group className="mb-3" controlId="formBasicPassword">
-							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" />
-							</Form.Group>
-							<Form.Group className="mb-3" controlId="formBasicCheckbox">
-							<Form.Check type="checkbox" label="Check me out" />
-						</Form.Group>
-						<Button variant="primary" type="submit">
-							Submit
-						</Button>
-					</Form>
-				) : (
-					<Carousel>
-						<Carousel.Item interval={3000}>
-							<img src="https://www.2quartos.com/y/3447/encanamento-e1522070773829.jpg" className="d-block w-100 imgSlide" alt="Slide 1" />
-							<Carousel.Caption>
-								<h3>First slide label</h3>
-								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							</Carousel.Caption>
-						</Carousel.Item>
-						<Carousel.Item interval={3000}>
-							<img src="https://citecnologia.com/wp-content/uploads/2021/07/WhatsApp-Image-2021-04-15-at-15.13.19-2.jpeg" className="d-block w-100 imgSlide" alt="Slide 2" />
-							<Carousel.Caption>
-								<h3>First slide label</h3>
-								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							</Carousel.Caption>
-						</Carousel.Item>
-						<Carousel.Item interval={3000}>
-							<img src="https://housemaid-brasil.com.br/wp-content/uploads/2021/06/Limpeza-no-tatuape-1.jpg" className="d-block w-100 imgSlide" alt="Slide 3" />
-							<Carousel.Caption>
-								<h3>First slide label</h3>
-								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							</Carousel.Caption>
-						</Carousel.Item>
-						<Carousel.Item interval={3000}>
-							<img src="https://www.rolnews.com.br/uploads/noticias/2020/04/conheca-as-funcoes-do-cortador-de-grama-e-da-rocadeira-1587085181.jpg" className="d-block w-100 imgSlide" alt="Slide 4" />
-							<Carousel.Caption>
-								<h3>First slide label</h3>
-								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							</Carousel.Caption>
-						</Carousel.Item>
-					</Carousel>
-				)}
+				<Carousel>
+					<Carousel.Item interval={3000}>
+						<img src="https://www.2quartos.com/y/3447/encanamento-e1522070773829.jpg" className="d-block w-100 imgSlide" alt="Slide 1" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item interval={3000}>
+						<img src="https://citecnologia.com/wp-content/uploads/2021/07/WhatsApp-Image-2021-04-15-at-15.13.19-2.jpeg" className="d-block w-100 imgSlide" alt="Slide 2" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item interval={3000}>
+						<img src="https://housemaid-brasil.com.br/wp-content/uploads/2021/06/Limpeza-no-tatuape-1.jpg" className="d-block w-100 imgSlide" alt="Slide 3" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item interval={3000}>
+						<img src="https://www.rolnews.com.br/uploads/noticias/2020/04/conheca-as-funcoes-do-cortador-de-grama-e-da-rocadeira-1587085181.jpg" className="d-block w-100 imgSlide" alt="Slide 4" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+				</Carousel>
 			</Body>
 		</Div>
 	);
