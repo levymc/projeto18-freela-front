@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from './AuthContext';
-import { Menu, ArrowBack, Person } from 'react-ionicons'
+import { Menu, ArrowBack, Person, PersonAdd } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
 
@@ -38,10 +38,10 @@ export default function Header() {
                         {!telaAcesso 
                             ? <Person 
                                 onClick={handlePersonClick} 
-                                className="iconHeader" 
                                 height="30px" width="30px" 
                                 color={`#FFF4F4`}
                             /> : null }
+                        {!logado && <PersonAdd height="30px" width="30px" color={`#FFF4F4`} />}
                     </SecDireita>
                 </DivLogo>
                 </HeaderContainer>
@@ -81,6 +81,9 @@ const SecDireita = styled.section`
     display: flex;
     color:RGB(250, 250, 251);
     align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
 `
 
 const DivLogo = styled.div`
