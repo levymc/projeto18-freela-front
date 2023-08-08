@@ -1,26 +1,50 @@
 import React from 'react';
 import { useAuth } from './AuthContext';
-import { Menu, ArrowBack } from 'react-ionicons'
+import { Menu, ArrowBack, Person } from 'react-ionicons'
 import styled from 'styled-components';
 
 export default function Header() {
-    const { telaAcesso, setTelaAcesso } = useAuth();
+    const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
   
     const handleLogoClick = () => {
         setTelaAcesso(!telaAcesso);
-    };
+    }
+    const handleMenuClick = () => {
+        setLogado(!logado)
+    }
   
     return (
         <>
             <HeaderContainer>
             <DivLogo className="shadow-drop-bottom">
-                <span onClick={handleLogoClick}>Get Samurais</span>
+                <span >Get Samurais</span>
                 <SecEsquerda>
-                {telaAcesso ? <Menu height="30px" width="30px" /> : <ArrowBack height="30px" width="30px" />}
+                    {!telaAcesso ? <Menu 
+                                        className="iconHeader"
+                                        onClick={handleMenuClick} 
+                                        height="30px" width="30px" 
+                                        color={`#FFF4F4`}
+                                    /> : 
+                                    <ArrowBack 
+                                        className="iconHeader" 
+                                        onClick={handleLogoClick} 
+                                        height="30px" width="30px"
+                                        color={`#FFF4F4`}
+                                    />
+                    }
                 </SecEsquerda>
+                <SecDireita>
+                    {!telaAcesso 
+                        ? <Person 
+                            onClick={handleLogoClick} 
+                            className="iconHeader" 
+                            height="30px" width="30px" 
+                            color={`#FFF4F4`}
+                        /> : null }
+                </SecDireita>
             </DivLogo>
             </HeaderContainer>
-            {/* <BordaInferior></BordaInferior> */}
+            <BordaInferior></BordaInferior>
         </>
     );
 }
@@ -28,7 +52,7 @@ export default function Header() {
 const HeaderContainer = styled.div`
     height: 10vh;
     width: 100%;
-    background-color: #574142;
+    background-color: RGB(0, 96, 177);
     position: absolute;
     top: 0;
     left: 0;
@@ -37,8 +61,8 @@ const HeaderContainer = styled.div`
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
     position: absolute;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    border-bottom: 2px solid black;
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+    /* border-bottom: 1px solid black; */
 `
 
 const SecEsquerda = styled.section`
@@ -47,11 +71,20 @@ const SecEsquerda = styled.section`
     font-size: 30px;
     display: flex;
     align-items: center;
+    color:RGB(250, 250, 251);
+`
+const SecDireita = styled.section`
+    position: absolute;
+    right: 3vw;
+    font-size: 30px;
+    display: flex;
+    color:RGB(250, 250, 251);
+    align-items: center;
 `
 
 const DivLogo = styled.div`
     font-size: 3em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);    
     user-select: none;
     color: #FFF4F4;
     display: flex;
@@ -64,8 +97,8 @@ const DivLogo = styled.div`
 `;
 
 const BordaInferior = styled.section`
-    background-color: #E2979A;
-    height: 10px;
+    background-color: RGB(255, 101, 0);
+    height: 5px;
     width: 100%;
     position: absolute;
     top: 10vh;
