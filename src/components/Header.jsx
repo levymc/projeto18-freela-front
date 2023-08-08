@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useAuth } from './AuthContext';
-import { Menu, ArrowBack, Person, PersonAdd } from 'react-ionicons'
+import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import { Link, useLocation } from 'react-router-dom';
@@ -44,11 +44,20 @@ export default function Header() {
                         {!telaAcesso 
                             ? <StyledLink to="/login">
                                 <Person 
-                                    className="iconHeader" 
                                     height="30px" width="30px" 
                                     color={`#FFF4F4`}
                                 />
                                 </StyledLink> : null }
+                        {!logado 
+                                ? <PersonAdd 
+                                        height="30px" width="30px" 
+                                        color={`#FFF4F4`}
+                                />
+                                : <CartOutline
+                                        height="30px" width="30px" 
+                                        color={`#FFF4F4`}
+                                    />
+                                    }
                     </SecDireita>
                 </DivLogo>
                 </HeaderContainer>
