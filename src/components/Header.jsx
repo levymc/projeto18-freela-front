@@ -20,7 +20,7 @@ export default function Header() {
                 </SecEsquerda>
             </DivLogo>
             </HeaderContainer>
-            <BordaInferior></BordaInferior>
+            {/* <BordaInferior></BordaInferior> */}
         </>
     );
 }
@@ -28,7 +28,7 @@ export default function Header() {
 const HeaderContainer = styled.div`
     height: 10vh;
     width: 100%;
-    background-color: #EAD3C1;
+    background-color: #574142;
     position: absolute;
     top: 0;
     left: 0;
@@ -37,6 +37,8 @@ const HeaderContainer = styled.div`
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
     position: absolute;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid black;
 `
 
 const SecEsquerda = styled.section`
@@ -51,7 +53,7 @@ const DivLogo = styled.div`
     font-size: 3em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     user-select: none;
-    color: #670000;
+    color: #FFF4F4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +64,7 @@ const DivLogo = styled.div`
 `;
 
 const BordaInferior = styled.section`
-    background-color: #670000;
+    background-color: #E2979A;
     height: 10px;
     width: 100%;
     position: absolute;

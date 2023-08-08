@@ -8,15 +8,29 @@ export default function Home() {
 			<Body>
 				{/* <h1>Carousel:</h1> */}
 				<Carousel>
-					<Carousel.Item interval={1000}>
-						<img src="https://img.freepik.com/vetores-premium/gato-bonito-trabalhando-no-laptop-com-ilustracao-de-icone-do-vetor-dos-desenhos-animados-do-copo-de-cafe_138676-3473.jpg?w=2000" className="d-block w-100 imgSlide" alt="Slide 1" />
+					<Carousel.Item interval={3000}>
+						<img src="https://www.2quartos.com/y/3447/encanamento-e1522070773829.jpg" className="d-block w-100 imgSlide" alt="Slide 1" />
 						<Carousel.Caption>
 						<h3>First slide label</h3>
 						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 						</Carousel.Caption>
 					</Carousel.Item>
-					<Carousel.Item interval={1000}>
-						<img src="https://static.vecteezy.com/ti/vetor-gratis/p3/2543415-cute-cat-or-kitten-animal-meow-cartoon-fofo-pets-exato-vector-colecao-ilustracao-cartoon-miau-gato-vetor.jpg" className="d-block w-100 imgSlide" alt="Slide 2" />
+					<Carousel.Item interval={3000}>
+						<img src="https://citecnologia.com/wp-content/uploads/2021/07/WhatsApp-Image-2021-04-15-at-15.13.19-2.jpeg" className="d-block w-100 imgSlide" alt="Slide 2" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item interval={3000}>
+						<img src="https://housemaid-brasil.com.br/wp-content/uploads/2021/06/Limpeza-no-tatuape-1.jpg" className="d-block w-100 imgSlide" alt="Slide 3" />
+						<Carousel.Caption>
+							<h3>First slide label</h3>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</Carousel.Caption>
+					</Carousel.Item>
+					<Carousel.Item interval={3000}>
+						<img src="https://www.rolnews.com.br/uploads/noticias/2020/04/conheca-as-funcoes-do-cortador-de-grama-e-da-rocadeira-1587085181.jpg" className="d-block w-100 imgSlide" alt="Slide 3" />
 						<Carousel.Caption>
 							<h3>First slide label</h3>
 							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -34,7 +48,7 @@ const Div = styled.div`
     align-items: center;
     width: 100%;
     height: ${props => props.height};
-	background-color: #EAD3C1;
+	background-color: #FFF4F4;
 `;
 
 const Body = styled.div`
@@ -50,7 +64,8 @@ const Body = styled.div`
     border-radius: 10px;
     color: black;
 	.imgSlide{
-		width: 300px !important;
+		width: 900px !important;
+		height: 500px !important;
 	}
 `;
 
