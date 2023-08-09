@@ -4,6 +4,7 @@ import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import { Link, useLocation } from 'react-router-dom';
+import modalCarrinho from './modalCarrinho';
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
@@ -13,31 +14,33 @@ export default function Header() {
     const handlePersonClick = () => {
         setTelaAcesso(!telaAcesso);
     }
-    const handleLogoClick = () => {
-        setTelaAcesso(!telaAcesso);
-    }
     const handleMenuClick = () => {
         setIsOpen(!isOpen)
     }
 
-  
+    
+
+    
     return (
         <>
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <Link to="/">Get Samurais</Link>
+                    <span>Get Samurais</span>
                     <SecEsquerda>
                         {!telaAcesso ? <MenuIcon 
                                             onClick={handleMenuClick} 
                                             height="30px" width="30px" 
                                             color={`#FFF4F4`}
                                         /> : 
-                                        <ArrowBack 
-                                            onClick={handlePersonClick} 
-                                            height="30px" width="30px"
-                                            color={`#FFF4F4`}
-                                        />
+                                        <StyledLink to="/">
+                                            <ArrowBack 
+                                                onClick={handlePersonClick} 
+                                                height="30px" width="30px"
+                                                color={`#FFF4F4`}
+                                                cursor={'pointer'}
+                                            />
+                                        </StyledLink>
                         }
                     </SecEsquerda>
                     <SecDireita>
@@ -46,6 +49,7 @@ export default function Header() {
                                 <Person 
                                     height="30px" width="30px" 
                                     color={`#FFF4F4`}
+                                    onClick={handlePersonClick} 
                                 />
                                 </StyledLink> : null }
                         {!logado 
@@ -53,9 +57,10 @@ export default function Header() {
                                         height="30px" width="30px" 
                                         color={`#FFF4F4`}
                                 />
-                                : <CartOutline
+                                : <CartIcon
                                         height="30px" width="30px" 
                                         color={`#FFF4F4`}
+                                        onClick={modalCarrinho}
                                     />
                                     }
                     </SecDireita>
@@ -73,7 +78,10 @@ const StyledLink = styled(Link)`
 `;
 
 const MenuIcon = styled(Menu)`
-        cursor: pointer;
+    cursor: pointer;
+`
+const CartIcon =styled(CartOutline)`
+    cursor: pointer;
 `
 
 const HeaderContainer = styled.div`
