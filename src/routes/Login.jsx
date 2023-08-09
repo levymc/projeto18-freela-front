@@ -68,5 +68,3 @@ const Body = styled.div`
 		height: 500px !important;
 	}
 `;
-
-// Não é necessário importar ou definir o componente ExampleCarouselImage.

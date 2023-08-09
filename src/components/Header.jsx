@@ -72,9 +72,9 @@ export default function Header() {
 }
 
 const StyledLink = styled(Link)`
-    text-decoration: none; /* Remover sublinhado */
-    color: inherit !important; /* Herdar cor do texto do pai */
-    cursor: pointer; /* Mostrar cursor de clique */
+    text-decoration: none;
+    color: inherit !important; 
+    cursor: pointer; 
 `;
 
 const MenuIcon = styled(Menu)`

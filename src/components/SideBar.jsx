@@ -8,6 +8,15 @@ export default function SideBar() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen } = useAuth();
     const [open, setOpen] = useState(false);
 
+    // const dataBtn = [
+    //     {
+    //         onClick: setOpen(!open),
+    //         ariaControls: "example-collapse-text",
+    //         ariaEexpanded: {open},
+    //         text: <ButtonColapsavel text="teste1" open={open} />
+    //     }
+    // ]
+
     const handleCloseSideBar = () => {
         setIsOpen(!isOpen);
     }
@@ -43,6 +52,26 @@ export default function SideBar() {
             <Button last={true}>Botão 4</Button>
         </SideBarContainer>
     );
+}
+
+const ButtonColapsavel = (props) => {
+    return(
+        <>
+        {props.text}
+        {props.open  
+            ? <SecionArrowIcon><ChevronDownOutline height="30px" width="30px"color={`#FFF4F4`} /></SecionArrowIcon>
+            : <SecionArrowIcon><ChevronForwardOutline height="30px" width="30px"color={`#FFF4F4`} /></SecionArrowIcon>
+        }
+        </>
+    )
+}
+
+const TextoColapsavel = (props) => {
+    return (
+        <>
+        
+        </>
+    )
 }
 
 const SideBarContainer = styled.div`
