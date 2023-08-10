@@ -4,6 +4,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import { useAuth } from '../components/AuthContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
@@ -11,34 +12,62 @@ export default function Home() {
 	return (
 		<Div height={'100vh'}>
 			<Body onClick={() => {setLogado(!logado)}}>
-                <Form >
+                <SCForm >
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" />
                         <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
+                            Seu email nunca será compartilhado.
                         </Form.Text>
                     </Form.Group>
                 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Senha</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
+                        <Form.Check type="checkbox" label="Lembrar conta" />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
+                    <SubmitBtn variant="primary" type="submit">
+                        Entrar
+                    </SubmitBtn>
+
+                    <LinkNewAccount to="/login">
+                        <span>Clique aqui para criar uma nova conta!!</span>
+                    </LinkNewAccount>
+                </SCForm>
 			</Body>
 		</Div>
 	);
 }
 
+const LinkNewAccount = styled(Link)`
+    position: absolute;
+    bottom: -4em;
+    display: flex;
+    justify-content: center;
+    color: #1e1eec !important;
+    width: 15vw;
+    span:hover{
+        color: #8484f7 !important;
+    }
+    span:active{
+        color: #d4d4ff !important;
+    }
+`
+const SubmitBtn = styled(Button)`
+    position:absolute;
+    bottom: -0.5em;
+    right: 0;
+`
 
+const SCForm = styled(Form)`
+    position: relative;
+    width: 60%;
+    top: 2em;
+`
 
 const Div = styled.div`
     display: flex;
@@ -52,10 +81,11 @@ const Body = styled.div`
     position: absolute;
     top: 14em;
 	display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 	flex-direction: column;
     align-items: center;
-    height: 40vh;
+    padding-bottom: 3em;
+    height: 42vh;
     width: 30vw;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
