@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 
-export default function Home() {
+
+export default function Login() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
 
 	return (
@@ -15,7 +16,7 @@ export default function Home() {
                 <SCForm >
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Email" />
                         <Form.Text className="text-muted">
                             Seu email nunca será compartilhado.
                         </Form.Text>
@@ -23,7 +24,7 @@ export default function Home() {
                 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Senha</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Senha" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -34,7 +35,7 @@ export default function Home() {
                         Entrar
                     </SubmitBtn>
 
-                    <LinkNewAccount to="/login">
+                    <LinkNewAccount to="/cadastro">
                         <span>Clique aqui para criar uma nova conta!!</span>
                     </LinkNewAccount>
                 </SCForm>

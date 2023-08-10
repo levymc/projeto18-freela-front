@@ -4,6 +4,7 @@ import { AuthProvider } from './components/AuthContext';
 import Home from './routes/Home'
 import Login from './routes/Login'
 import Header from './components/Header';
+import Cadastro from './routes/Cadastro';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/cadastro" element={<Cadastro />} />
                 </Routes>
             </Router>
         </AuthProvider>
