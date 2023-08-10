@@ -9,18 +9,6 @@ import modalCarrinho from './modalCarrinho';
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
 
-    const navigateTo = useLocation()
-  
-    const handlePersonClick = () => {
-        setTelaAcesso(!telaAcesso);
-    }
-    const handleMenuClick = () => {
-        setIsOpen(!isOpen)
-    }
-
-    
-
-    
     return (
         <>
             <HeaderContainer>
@@ -29,13 +17,13 @@ export default function Header() {
                     <span>Get Samurais</span>
                     <SecEsquerda>
                         {!telaAcesso ? <MenuIcon 
-                                            onClick={handleMenuClick} 
+                                            onClick={() => setIsOpen(!isOpen)} 
                                             height="30px" width="30px" 
                                             color={`#FFF4F4`}
                                         /> : 
                                         <StyledLink to="/">
                                             <ArrowBack 
-                                                onClick={handlePersonClick} 
+                                                onClick={() => setTelaAcesso(false)} 
                                                 height="30px" width="30px"
                                                 color={`#FFF4F4`}
                                                 cursor={'pointer'}
@@ -49,7 +37,7 @@ export default function Header() {
                                 <Person 
                                     height="30px" width="30px" 
                                     color={`#FFF4F4`}
-                                    onClick={handlePersonClick} 
+                                    onClick={() => setTelaAcesso(true)} 
                                 />
                                 </StyledLink> : null }
                         {!logado 
