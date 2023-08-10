@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { Search } from 'react-ionicons'
 import Carousel from 'react-bootstrap/Carousel'
-import { useAuth } from '../components/AuthContext';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../components/AuthContext'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Tooltip from 'react-bootstrap/Tooltip';
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+
 
 export default function Cadastro() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
@@ -17,6 +21,15 @@ export default function Cadastro() {
             newCepValue = newCepValue.slice(0, 5) + '-' + newCepValue.slice(5)
         }
         setCepValue(newCepValue)
+    }
+
+    const handleCepApi = () => {
+        console.log(cepValue.replace("-",""))
+        axios.get(`https://viacep.com.br/ws/${cepValue.replace("-","")}/json/`).then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.error(err)
+        })
     }
 
     useEffect(() => {
@@ -54,12 +67,20 @@ export default function Cadastro() {
 
                     <Form.Group className="mb-3" controlId="cep">
                         <Form.Label>CEP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="CEP"
-                            value={cepValue}
-                            onChange={handleCepChange}
-                        />
+                        <InputGroup>
+                            <IconWrapper 
+                                tamanho = {cepValue.length}
+                                onClick={handleCepApi}
+                            >
+                                {cepValue.length >= 9 && <SearchIcon color="#000" />}
+                            </IconWrapper>
+                            <Form.Control
+                                type="text"
+                                placeholder="CEP"
+                                value={cepValue}
+                                onChange={handleCepChange}
+                            />
+                        </InputGroup>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="numEnd">
                         <Form.Label>Número Moradia</Form.Label>
@@ -123,4 +144,21 @@ const Body = styled.div`
 		width: 900px !important;
 		height: 500px !important;
 	}
+`;
+const IconWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: ${props => props.tamanho === 9 ? "10px" : 0};;
+`;
+
+const InputGroup = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+`;
+
+const SearchIcon = styled(Search)`
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
 `;
