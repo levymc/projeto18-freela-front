@@ -1,14 +1,14 @@
 @import-normalize;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   position: relative;
+  box-sizing: border-box;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #FFF4F4;
+  background-color: RGB(0, 26, 61);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,8 +16,14 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: auto;
+
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   font-family: 'Ubuntu', sans-serif;
 }
 

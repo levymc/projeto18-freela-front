@@ -13,7 +13,9 @@ import axios from 'axios'
 export default function Cadastro() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
 
-    const [cepValue, setCepValue] = useState("") 
+    const [ cepValue, setCepValue ] = useState("") 
+    const [ achouCep, setAchouCep ] = useState(false)
+    const [ userAddress, setUserAddess ] = useState({})
 
     const handleCepChange = (event) => {
         let newCepValue = event.target.value.slice(0, 9).replace(/[^0-9-]/g, "");
@@ -24,9 +26,10 @@ export default function Cadastro() {
     }
 
     const handleCepApi = () => {
-        console.log(cepValue.replace("-",""))
         axios.get(`https://viacep.com.br/ws/${cepValue.replace("-","")}/json/`).then(res => {
             console.log(res.data)
+            setAchouCep(true)
+            setUserAddess(res.data)
         }).catch(err => {
             console.error(err)
         })
@@ -40,7 +43,7 @@ export default function Cadastro() {
 
 	return (
 		<Div height={'100vh'}>
-			<Body onClick={() => {setLogado(!logado)}}>
+			<Body achou={achouCep} onClick={() => {setLogado(!logado)}}>
                 <SCForm >
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Nome</Form.Label>
@@ -87,6 +90,19 @@ export default function Cadastro() {
                         <Form.Control type="text" placeholder="Número Moradia" />
                     </Form.Group>
 
+                    { achouCep && 
+                        <>
+                            <Form.Group className="mb-3" controlId="numEnd">
+                                <Form.Label>Cidade</Form.Label>
+                                <Form.Control type="text" value={userAddress.localidade} readOnly/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="numEnd">
+                                <Form.Label>Número Moradia</Form.Label>
+                                <Form.Control type="text" placeholder="Número Moradia" />
+                            </Form.Group>
+                        </>
+                    }
+
 
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Lembrar conta" />
@@ -123,16 +139,19 @@ const SCForm = styled(Form)`
 const Div = styled.div`
     display: flex;
     justify-content: center;
+    overflow-y: auto;
     width: 100%;
-    height: ${props => props.height};
+    min-height: 100vh;
+    height: auto;
 	background-color: RGB(0, 26, 61);
+    margin-bottom: 4em;
 `;
 
 const Body = styled.div`
     position: absolute;
     top: 14em;
-    padding-bottom: 3em;
-    height: 60vh;
+    /* padding-bottom: 3em; */
+    height: 80vh;
     width: 40vw;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
