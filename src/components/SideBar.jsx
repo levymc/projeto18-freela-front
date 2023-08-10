@@ -7,8 +7,7 @@ import CollapsedBtns from './ColapsedBtns';
 import buttons from './buttons';
 
 export default function SideBar() {
-    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen } = useAuth();
-
+    const { isOpen, setIsOpen } = useAuth();
 
     return (
         <SideBarContainer isopen={isOpen}>
@@ -59,18 +58,3 @@ const SecIcon = styled.section`
     top: 2em;
     right: 2em;
 `;
-
-const Button = styled.button`
-    width: 100%;
-    background-color: transparent;
-    border-top: 1px solid #fafafb6c; 
-    border-left: 0; border-right: 0;
-    border-radius: 0;
-    border-bottom: ${props => (props.last ? `1px solid #fafafb6c` : '0')}; 
-    position: relative;
-    display: flex;
-    align-items: center;
-
-`;
-
-
