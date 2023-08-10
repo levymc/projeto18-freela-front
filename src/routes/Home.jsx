@@ -71,9 +71,7 @@ const Body = styled.div`
     border-radius: 10px;
     color: black;
 	.imgSlide{
-		width: 900px !important;
-		height: 500px !important;
+		width: 50vw !important;
+		height: 45vh !important;
 	}
 `;
-
-// Não é necessário importar ou definir o componente ExampleCarouselImage.
