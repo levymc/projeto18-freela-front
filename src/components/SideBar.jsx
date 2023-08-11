@@ -4,7 +4,7 @@ import { Close, ChevronForwardOutline, ChevronDownOutline } from 'react-ionicons
 import { useAuth } from './AuthContext';
 import SideBarBtn from './SideBarBtn';
 import CollapsedBtns from './ColapsedBtns';
-import buttons from './buttons';
+import buttons from './dto/buttons';
 
 export default function SideBar() {
     const { isOpen, setIsOpen } = useAuth();
@@ -12,7 +12,7 @@ export default function SideBar() {
     return (
         <SideBarContainer isopen={isOpen}>
             <SecIcon>
-                <Close
+                <SCClose
                     onClick={() => setIsOpen(false)}
                     height="30px" width="30px"
                     color={`#FFF4F4`}
@@ -58,3 +58,8 @@ const SecIcon = styled.section`
     top: 2em;
     right: 2em;
 `;
+
+const SCClose = styled(Close)`
+    color: #FFF4F4;
+    cursor: pointer;
+`

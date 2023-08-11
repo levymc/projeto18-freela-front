@@ -93,19 +93,36 @@ export default function Cadastro() {
                     { achouCep && 
                         <>
                             <Form.Group className="mb-3" controlId="numEnd">
-                                <Form.Label>Cidade</Form.Label>
-                                <Form.Control type="text" value={userAddress.localidade} readOnly/>
+                                <Form.Label>Endereço</Form.Label>
+                                <Form.Control type="text" value={userAddress.logradouro} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="numEnd">
-                                <Form.Label>Número Moradia</Form.Label>
-                                <Form.Control type="text" placeholder="Número Moradia" />
+                                <Form.Label>Bairro</Form.Label>
+                                <Form.Control type="text" value={userAddress.bairro} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="numEnd">
+                                <Form.Label>Cidade</Form.Label>
+                                <Form.Control type="text" value={userAddress.localidade} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="numEnd">
+                                <Form.Label>Estado</Form.Label>
+                                <Form.Control type="text" value={userAddress.uf} readOnly/>
                             </Form.Group>
                         </>
                     }
 
 
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Lembrar conta" />
+                        <Form.Check 
+                            type="checkbox" 
+                            label={
+                                    <a 
+                                        href="https://github.com/levymc" 
+                                        target="_blank">Concordar com os <font color={"blue"}>Termos</font>
+                                    </a>
+                                }
+                        />
                     </Form.Group>
 
                     <SubmitBtn variant="primary" type="submit">
@@ -144,15 +161,15 @@ const Div = styled.div`
     min-height: 100vh;
     height: auto;
 	background-color: RGB(0, 26, 61);
-    margin-bottom: 4em;
+    /* margin-bottom: 4em; */
 `;
 
 const Body = styled.div`
     position: absolute;
-    top: 14em;
+    top: 10em;
     /* padding-bottom: 3em; */
-    height: 80vh;
-    width: 40vw;
+    height: ${props => props.achou ? "75vh" : "60vh"};
+    width: 50vw;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
     margin: 0 auto;
