@@ -1,10 +1,17 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { modalCarrinho, modalHome } from './modais';
+import Tooltip from '@mui/material/Tooltip';
+import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
@@ -19,42 +26,52 @@ export default function Header() {
                 <DivLogo className="shadow-drop-bottom">
                     <span>Get Serviços</span>
                     <SecEsquerda>
-                        {!telaAcesso ? <MenuIcon 
-                                            onClick={() => setIsOpen(!isOpen)} 
-                                            height="30px" width="30px" 
-                                            color={`#FFF4F4`}
-                                        /> : 
-                                        <StyledLink to="/">
-                                            <ArrowBack 
+                        {!telaAcesso 
+                                        ? <Tooltip arrow title="Menu">
+                                            <SCMenuIcon 
+                                                onClick={() => setIsOpen(!isOpen)} 
+                                                height="30px" width="30px" 
+                                                color={`#FFF4F4`}
+                                            />
+                                        </Tooltip> 
+                                        : <StyledLink to="/">
+                                        <Tooltip arrow title="Pagina Inicial">
+                                            <ArrowBackIcon 
                                                 onClick={() => setTelaAcesso(false)} 
                                                 height="30px" width="30px"
                                                 color={`#FFF4F4`}
                                                 cursor={'pointer'}
                                             />
+                                            </Tooltip> 
                                         </StyledLink>
                         }
                     </SecEsquerda>
                     <SecDireita>
                         {!telaAcesso 
                             ? <StyledLink to="/login">
-                                <Person 
-                                    height="30px" width="30px" 
-                                    color={`#FFF4F4`}
-                                    onClick={() => setTelaAcesso(true)} 
-                                />
-                                </StyledLink> : null }
+                                <Tooltip arrow title="Login">
+                                    <PersonIcon 
+                                        height="30px" width="30px" 
+                                        color={`#FFF4F4`}
+                                        onClick={() => setTelaAcesso(true)} 
+                                    /></Tooltip> 
+                                </StyledLink>
+                                : null }
                         {!logado 
-                                ? <SCPersonAdd 
-                                        height = "30px" width="30px" 
+                                ? <Tooltip arrow title="Criar conta">
+                                    <SCPersonAdd 
                                         color = {`#FFF4F4`}
                                         onClick = { () => navigateTo('/cadastro') }
-                                />
-                                : <CartIcon
+                                    />
+                                </Tooltip>
+                                : <Tooltip arrow title="Carrinho">
+                                    <CartIcon
                                         height="30px" width="30px" 
                                         color={`#FFF4F4`}
                                         onClick={modalCarrinho}
                                     />
-                                    }
+                                </Tooltip>
+                                }
                     </SecDireita>
                 </DivLogo>
                 </HeaderContainer>
@@ -69,14 +86,14 @@ const StyledLink = styled(Link)`
     cursor: pointer; 
 `;
 
-const SCPersonAdd = styled(PersonAdd)`
+const SCPersonAdd = styled(PersonAddIcon)`
     cursor: pointer;
 `
 
-const MenuIcon = styled(Menu)`
+const SCMenuIcon = styled(MenuIcon)`
     cursor: pointer;
 `
-const CartIcon =styled(CartOutline)`
+const CartIcon =styled(ShoppingCartIcon)`
     cursor: pointer;
 `
 
@@ -114,7 +131,7 @@ const SecDireita = styled.section`
     align-items: center;
     display: flex;
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
 `
 
 const DivLogo = styled.div`
