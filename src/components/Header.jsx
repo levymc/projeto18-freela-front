@@ -4,13 +4,15 @@ import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import { Link, useLocation } from 'react-router-dom';
-import modalCarrinho from './modalCarrinho';
+import { modalCarrinho, modalHome } from './modais';
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
+    const [ firstAccess, setFirstAccess ] = useState(false);
 
     return (
         <>
+            { !firstAccess && modalHome(setFirstAccess)} 
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">

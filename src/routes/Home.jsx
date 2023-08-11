@@ -11,6 +11,7 @@ import iconsList from '../components/dto/menuCategoriaIcons';
 export default function Home() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
 
+
 	return (
 		<Div height={'100vh'}>
 			<Body>
