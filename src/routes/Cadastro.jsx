@@ -43,6 +43,7 @@ export default function Cadastro() {
             simpleModal("Usuário criado com sucesso!", "success").then(() => navigateTo('/login'))
         }).catch(err => {
             console.error(err.response)
+            simpleModal(err.response.data, "error")
         })
     }
 
@@ -70,12 +71,12 @@ export default function Cadastro() {
                 }}>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Nome</Form.Label>
-                        <Form.Control type="text" placeholder="Nome" />
+                        <Form.Control required type="text" placeholder="Nome" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Email" />
+                        <Form.Control required type="email" placeholder="Email" />
                         <Form.Text className="text-muted">
                         </Form.Text>
                     </Form.Group>
@@ -83,11 +84,11 @@ export default function Cadastro() {
                     
                     <Form.Group className="mb-3" controlId="password">
                         <Form.Label>Senha</Form.Label>
-                        <Form.Control type="password" placeholder="Senha" />
+                        <Form.Control required type="password" placeholder="Senha" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="confirmPassword">
                         <Form.Label>Confirme sua senha</Form.Label>
-                        <Form.Control type="password" placeholder="Confirme sua senha" />
+                        <Form.Control required type="password" placeholder="Confirme sua senha" />
                     </Form.Group>
 
 
@@ -184,6 +185,7 @@ const Div = styled.div`
     height: auto;
 	background-color: RGB(0, 26, 61);
     padding-bottom: 5vh;
+    overflow-y: hidden;
 	padding-top: 20vh;
 `;
 
