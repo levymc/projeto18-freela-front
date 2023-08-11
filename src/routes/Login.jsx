@@ -52,13 +52,14 @@ export default function Login() {
                         <Form.Control type="password" placeholder="Senha" />
                     </Form.Group>
 
-                    <SubmitBtn variant="primary" type="submit">
-                        Entrar
-                    </SubmitBtn>
-
                     <LinkNewAccount to="/cadastro">
                         <span>Clique aqui para criar uma nova conta!!</span>
                     </LinkNewAccount>
+
+                    <SubmitBtn variant="primary" type="submit">
+                        Entrar
+                    </SubmitBtn>
+                    
                 </SCForm>
 			</Body>
 		</Div>
@@ -66,8 +67,8 @@ export default function Login() {
 }
 
 const LinkNewAccount = styled(Link)`
-    position: absolute;
-    bottom: -4em;
+    /* position: absolute; */
+    /* bottom: -10%; */
     display: flex;
     justify-content: center;
     color: #1e1eec !important;
@@ -80,18 +81,20 @@ const LinkNewAccount = styled(Link)`
     }
 `
 const SubmitBtn = styled(Button)`
-    position:absolute;
-    bottom: -2em;
-    right: 0;
+    position:relative;
+    padding: 0.2em 1.5em 0.2em 1.5em;
+    right: -30%;
 `
 
 const SCForm = styled(Form)`
-    position: relative;
+    /* position: relative; */
     width: 60%;
     top: 2em;
     display:flex;
     flex-direction: column;
-    /* gap: 1em; */
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
 `
 
 const Div = styled.div`
@@ -104,18 +107,16 @@ const Div = styled.div`
 
 const Body = styled.div`
     position: absolute;
-    top: 14em;
+    top: 12em;
 	display: flex;
     /* justify-content: center; */
 	flex-direction: column;
     align-items: center;
-    padding-bottom: 3em;
-    height: 42vh;
-    width: 30vw;
+    width: 30%;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
     margin: 0 auto;
-    padding: 20px; 
+    padding: 2em 0; 
     border-radius: 10px;
     color: black;
 	.imgSlide{
