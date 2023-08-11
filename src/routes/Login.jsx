@@ -11,14 +11,16 @@ import { simpleModal } from '../components/modais'
 
 
 export default function Login() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
+	const { telaAcesso, setTelaAcesso, logado, setLogado, loggedUsers, setLoggedUsers } = useAuth();
 
     const navigateTo = useNavigate()
 
     const handleSubmit = (data) => {
         axios.post('http://localhost:5000/signin', data).then(res => {
             console.log(res.data)
+            localStorage.setItem(data.userId, data);
             setLogado(true)
+            setLoggedUsers(loggedUsers => [...loggedUsers, data]);
             simpleModal("Login realizado", "success").then(() => navigateTo('/'))
         }).catch(err => {
             console.error(err.response)
