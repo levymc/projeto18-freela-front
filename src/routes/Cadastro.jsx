@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Search } from 'react-ionicons'
 import Carousel from 'react-bootstrap/Carousel'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Tooltip from 'react-bootstrap/Tooltip';
-import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import { simpleModal } from '../components/modais'
 
 export default function Cadastro() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
@@ -16,6 +16,8 @@ export default function Cadastro() {
     const [ cepValue, setCepValue ] = useState("") 
     const [ achouCep, setAchouCep ] = useState(false)
     const [ userAddress, setUserAddess ] = useState({})
+
+    const navigateTo = useNavigate()
 
     const handleCepChange = (event) => {
         let newCepValue = event.target.value.slice(0, 9).replace(/[^0-9-]/g, "");
@@ -35,6 +37,15 @@ export default function Cadastro() {
         })
     }
 
+    const handleSubmit = (data) => {
+        axios.post('http://localhost:5000/signup', data).then(res => {
+            console.log(res.data)
+            simpleModal("Usuário criado com sucesso!", "success").then(() => navigateTo('/login'))
+        }).catch(err => {
+            console.error(err.response)
+        })
+    }
+
     useEffect(() => {
         console.log(cepValue)
     }, [cepValue])
@@ -44,13 +55,25 @@ export default function Cadastro() {
 	return (
 		<Div height={'100vh'}>
 			<Body achou={achouCep}>
-                <SCForm >
+                <SCForm onSubmit={(event) => {
+                    event.preventDefault()
+                    const formData = {
+                        nome: event.target.name.value,
+                        email: event.target.email.value,
+                        password: event.target.password.value,
+                        confirmPassword: event.target.confirmPassword.value,
+                        cep: event.target.cep.value.replace("-", ""),
+                        numEnd: event.target.numEnd.value,
+                        endereco: event.target.endereco.value,
+                    };
+                    handleSubmit(formData);
+                }}>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Nome</Form.Label>
                         <Form.Control type="text" placeholder="Nome" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="emailCad">
+                    <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Email" />
                         <Form.Text className="text-muted">
@@ -58,11 +81,11 @@ export default function Cadastro() {
                     </Form.Group>
                 
                     
-                    <Form.Group className="mb-3" controlId="passwordCad">
+                    <Form.Group className="mb-3" controlId="password">
                         <Form.Label>Senha</Form.Label>
                         <Form.Control type="password" placeholder="Senha" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="confPassCad">
+                    <Form.Group className="mb-3" controlId="confirmPassword">
                         <Form.Label>Confirme sua senha</Form.Label>
                         <Form.Control type="password" placeholder="Confirme sua senha" />
                     </Form.Group>
@@ -87,25 +110,25 @@ export default function Cadastro() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="numEnd">
                         <Form.Label>Número Moradia</Form.Label>
-                        <Form.Control type="text" placeholder="Número Moradia" />
+                        <Form.Control type="number" placeholder="Número Moradia" />
                     </Form.Group>
 
                     { achouCep && 
                         <>
-                            <Form.Group className="mb-3" controlId="numEnd">
+                            <Form.Group className="mb-3" controlId="endereco">
                                 <Form.Label>Endereço</Form.Label>
                                 <Form.Control type="text" value={userAddress.logradouro} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="numEnd">
+                            <Form.Group className="mb-3" controlId="bairro">
                                 <Form.Label>Bairro</Form.Label>
                                 <Form.Control type="text" value={userAddress.bairro} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="numEnd">
+                            <Form.Group className="mb-3" controlId="cidade">
                                 <Form.Label>Cidade</Form.Label>
                                 <Form.Control type="text" value={userAddress.localidade} />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="numEnd">
+                            <Form.Group className="mb-3" controlId="estado">
                                 <Form.Label>Estado</Form.Label>
                                 <Form.Control type="text" value={userAddress.uf} readOnly/>
                             </Form.Group>
@@ -143,8 +166,8 @@ const SubmitBtn = styled(Button)`
 
 const SCForm = styled(Form)`
     position: relative;
-    width: 80%;
-    margin: auto;
+    /* width: %; */
+    /* margin: auto; */
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 1fr;
@@ -173,7 +196,7 @@ const Body = styled.div`
 
     padding: 4em;
     width: 80%;
-    height: auto;
+    height: 60%;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 
     border-radius: 10px;
