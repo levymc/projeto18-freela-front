@@ -43,7 +43,7 @@ export default function Cadastro() {
 
 	return (
 		<Div height={'100vh'}>
-			<Body achou={achouCep} onClick={() => {setLogado(!logado)}}>
+			<Body achou={achouCep}>
                 <SCForm >
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Nome</Form.Label>
@@ -145,7 +145,6 @@ const SCForm = styled(Form)`
     position: relative;
     width: 80%;
     margin: auto;
-    margin-top: 4em;
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 1fr;
@@ -161,25 +160,24 @@ const Div = styled.div`
     min-height: 100vh;
     height: auto;
 	background-color: RGB(0, 26, 61);
-    /* margin-bottom: 4em; */
+    padding-bottom: 5vh;
+	padding-top: 20vh;
 `;
 
 const Body = styled.div`
-    position: absolute;
-    top: 10em;
-    /* padding-bottom: 3em; */
-    height: ${props => props.achou ? "75vh" : "60vh"};
-    width: 50vw;
+   /* position: absolute; */
+	display: flex;
+    justify-content: center;
+	flex-wrap: wrap;
+	gap: 2em;
+
+    padding: 4em;
+    width: 80%;
+    height: auto;
     background-color: RGB(250, 250, 251);
-	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
-    margin: 0 auto;
-    padding: 20px; 
+	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 
     border-radius: 10px;
     color: black;
-	.imgSlide{
-		width: 900px !important;
-		height: 500px !important;
-	}
 `;
 const IconWrapper = styled.div`
     display: flex;

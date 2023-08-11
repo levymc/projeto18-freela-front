@@ -12,7 +12,7 @@ export default function Login() {
 
 	return (
 		<Div height={'100vh'}>
-			<Body onClick={() => {setLogado(!logado)}}>
+			<Body>
                 <SCForm >
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>

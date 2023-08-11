@@ -3,12 +3,13 @@ import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
 import SideBar from './SideBar';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { modalCarrinho, modalHome } from './modais';
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
     const [ firstAccess, setFirstAccess ] = useState(false);
+    const navigateTo = useNavigate()
 
     return (
         <>
@@ -16,7 +17,7 @@ export default function Header() {
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <span>Get Samurais</span>
+                    <span>Get Serviços</span>
                     <SecEsquerda>
                         {!telaAcesso ? <MenuIcon 
                                             onClick={() => setIsOpen(!isOpen)} 
@@ -43,9 +44,10 @@ export default function Header() {
                                 />
                                 </StyledLink> : null }
                         {!logado 
-                                ? <PersonAdd 
-                                        height="30px" width="30px" 
-                                        color={`#FFF4F4`}
+                                ? <SCPersonAdd 
+                                        height = "30px" width="30px" 
+                                        color = {`#FFF4F4`}
+                                        onClick = { () => navigateTo('/cadastro') }
                                 />
                                 : <CartIcon
                                         height="30px" width="30px" 
@@ -66,6 +68,10 @@ const StyledLink = styled(Link)`
     color: inherit !important; 
     cursor: pointer; 
 `;
+
+const SCPersonAdd = styled(PersonAdd)`
+    cursor: pointer;
+`
 
 const MenuIcon = styled(Menu)`
     cursor: pointer;
