@@ -6,7 +6,7 @@ export function AuthProvider({ children }) {
     const [telaAcesso, setTelaAcesso] = useState(false)
     const [logado, setLogado] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const { loggedUsers, setLoggedUsers } = useState([])
+    const [ loggedUsers, setLoggedUsers ] = useState([])
 
     return (
         <AuthContext.Provider value={{ 

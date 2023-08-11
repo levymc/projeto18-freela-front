@@ -22,7 +22,8 @@ export const modalCarrinho = () => {
 
 export const modalHome = (setFirstAccess) => {
     Swal.fire({
-        title: "Bem vindo!"
+        title: "Bem vindo!",
+        confirmButtonColor: "#FF6500",
     }).then(res => {
         res.isConfirmed && setFirstAccess(true)
     })
@@ -31,6 +32,7 @@ export const modalHome = (setFirstAccess) => {
 export const simpleModal = (title, icon) => {
     return Swal.fire({
         title: title,
-        icon: icon
+        icon: icon,
+        confirmButtonColor: "#FF6500",
     })
 }

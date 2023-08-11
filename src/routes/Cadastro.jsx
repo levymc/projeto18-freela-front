@@ -37,6 +37,11 @@ export default function Cadastro() {
     }
 
     const handleSubmit = (data) => {
+
+        // validações sobre os inputs
+        if (data.password != data.confirmPassword) return simpleModal("As senhas devem ser iguais.", "warning")
+        else if (!data.cidade || !data.endereco) return simpleModal("Busque pelo CEP, clique na lupa", "warning")
+
         axios.post('http://localhost:5000/signup', data).then(res => {
             console.log(res.data)
             simpleModal("Usuário criado com sucesso!", "success").then(() => navigateTo('/login'))
@@ -55,19 +60,22 @@ export default function Cadastro() {
 	return (
 		<Div height={'100vh'}>
 			<Body achou={achouCep}>
-                <SCForm onSubmit={(event) => {
-                    event.preventDefault()
-                    const formData = {
-                        nome: event.target.name.value,
-                        email: event.target.email.value,
-                        password: event.target.password.value,
-                        confirmPassword: event.target.confirmPassword.value,
-                        cep: event.target.cep.value.replace("-", ""),
-                        numEnd: event.target.numEnd.value,
-                        endereco: event.target.endereco.value,
-                    };
-                    handleSubmit(formData);
-                }}>
+            <SCForm onSubmit={(event) => {
+                event.preventDefault();
+                const formData = {
+                    nome: event.target.name.value,
+                    email: event.target.email.value,
+                    password: event.target.password.value,
+                    confirmPassword: event.target.confirmPassword.value,
+                    cep: event.target.cep.value.replace("-", ""),
+                    numEnd: event.target.numEnd.value ? event.target.numEnd.value : "",
+                    endereco: achouCep ? event.target.endereco.value : null,
+                    bairro: achouCep ? event.target.bairro.value : null,
+                    cidade: achouCep ? event.target.cidade.value : null,
+                    estado: achouCep ? event.target.estado.value : null,
+                };
+                handleSubmit(formData);
+            }}>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Nome</Form.Label>
                         <Form.Control required type="text" placeholder="Nome" />
@@ -136,7 +144,7 @@ export default function Cadastro() {
                     }
 
 
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check 
                             type="checkbox" 
                             label={
@@ -146,8 +154,8 @@ export default function Cadastro() {
                                     </a>
                                 }
                         />
-                    </Form.Group>
-
+                    </Form.Group> */}
+                    <div></div>
                     <SubmitBtn variant="primary" type="submit">
                         Cadastrar
                     </SubmitBtn>
@@ -158,10 +166,10 @@ export default function Cadastro() {
 }
 
 const SubmitBtn = styled(Button)`
-    position:absolute;
-    bottom: -2em;
+    /* position:absolute;
+    bottom: -3em;
     right: 0;
-    width: 10em;
+    width: 10em; */
 `
 
 const SCForm = styled(Form)`
