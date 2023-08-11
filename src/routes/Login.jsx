@@ -4,17 +4,40 @@ import Carousel from 'react-bootstrap/Carousel'
 import { useAuth } from '../components/AuthContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { simpleModal } from '../components/modais'
+
 
 
 export default function Login() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
 
+    const navigateTo = useNavigate()
+
+    const handleSubmit = (data) => {
+        axios.post('http://localhost:5000/signin', data).then(res => {
+            console.log(res.data)
+            setLogado(true)
+            simpleModal("Login realizado", "success").then(() => navigateTo('/'))
+        }).catch(err => {
+            console.error(err.response)
+            simpleModal(err.response.data, "error")
+        })
+    }
+
 	return (
 		<Div height={'100vh'}>
 			<Body>
-                <SCForm >
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                <SCForm onSubmit={(event) => {
+                    event.preventDefault()
+                    const formData = {
+                        email: event.target.email.value,
+                        password: event.target.password.value,
+                    };
+                    handleSubmit(formData);
+                }}>
+                    <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Email" />
                         <Form.Text className="text-muted">
@@ -22,13 +45,9 @@ export default function Login() {
                         </Form.Text>
                     </Form.Group>
                 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Group className="mb-3" controlId="password">
                         <Form.Label>Senha</Form.Label>
                         <Form.Control type="password" placeholder="Senha" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Lembrar conta" />
                     </Form.Group>
 
                     <SubmitBtn variant="primary" type="submit">
@@ -60,7 +79,7 @@ const LinkNewAccount = styled(Link)`
 `
 const SubmitBtn = styled(Button)`
     position:absolute;
-    bottom: -0.5em;
+    bottom: -2em;
     right: 0;
 `
 
@@ -68,6 +87,9 @@ const SCForm = styled(Form)`
     position: relative;
     width: 60%;
     top: 2em;
+    display:flex;
+    flex-direction: column;
+    /* gap: 1em; */
 `
 
 const Div = styled.div`

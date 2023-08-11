@@ -6,7 +6,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Tooltip from 'react-bootstrap/Tooltip';
 import axios from 'axios'
 import { simpleModal } from '../components/modais'
 
