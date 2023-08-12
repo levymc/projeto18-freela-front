@@ -13,8 +13,7 @@ import HTMLReactParser from 'html-react-parser';
 
 
 export default function Home() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
-	const [ categorias, setCategorias ] = useState([])
+	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
 
 
 

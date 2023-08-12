@@ -5,7 +5,7 @@ import Home from './routes/Home'
 import Login from './routes/Login'
 import Header from './components/Header';
 import Cadastro from './routes/Cadastro';
-
+import Categoria from './routes/Categoria'
 
 function App() {
     return (
@@ -16,6 +16,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
+                    <Route path="/categoria/:id" element={<Categoria />} />
                 </Routes>
             </Router>
         </AuthProvider>

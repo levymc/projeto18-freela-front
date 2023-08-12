@@ -7,13 +7,15 @@ export function AuthProvider({ children }) {
     const [logado, setLogado] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [ loggedUser, setLoggedUser ] = useState(null)
+	const [ categorias, setCategorias ] = useState([])
 
     return (
         <AuthContext.Provider value={{ 
                                         telaAcesso, setTelaAcesso, 
                                         logado, setLogado, 
                                         isOpen, setIsOpen, 
-                                        loggedUser, setLoggedUser 
+                                        loggedUser, setLoggedUser,
+                                        categorias, setCategorias
                                     }}>
         {children}
         </AuthContext.Provider>

@@ -32,7 +32,7 @@ export const modalHome = (setFirstAccess) => {
     })
 }
 
-export const modalServico = () => {
+export const modalServico = (title, icon) => {
     return Swal.fire({
         title: title,
         icon: icon,

@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import axios from 'axios'
+import { modalServico } from './modais';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function CardIcons(props) {
+    const navigateTo = useNavigate()
 
     const handleService = () => {
         console.log(props.text, props.id)
+        navigateTo('/categoria/'+props.id)
     }
 
 	return (
