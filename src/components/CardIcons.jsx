@@ -7,7 +7,7 @@ import axios from 'axios'
 export default function CardIcons(props) {
 
     const handleService = () => {
-
+        console.log(props.text, props.id)
     }
 
 	return (

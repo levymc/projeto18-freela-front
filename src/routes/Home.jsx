@@ -16,24 +16,24 @@ export default function Home() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
 	const [ categorias, setCategorias ] = useState([])
 
-	// const parse = new HTMLReactParser()
 
-	// useEffect(() => {
-	// 	axios.get('http://localhost:5000/categorias').then(res => {
-	// 		console.log(res.data)
-	// 		setCategorias(res.data)
-	// 	}).catch(err => {
-	// 		console.error(err.response)
-	// 		simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
-	// 	})
-	// }, [])
+
+	useEffect(() => {
+		axios.get('http://localhost:5000/categorias').then(res => {
+			setCategorias(res.data)
+			iconsList.forEach((icon, i) => {
+				if ( icon.descricao === res.data[i].descricao) return icon.id = res.data[i].id
+			})
+		}).catch(err => {
+			console.error(err.response)
+			simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
+		})
+	}, [])
 	
 
 	return (
 		<Div height={'100vh'}>
-			<Body onClick={() => {
-                console.log(logado, telaAcesso)
-            }}>
+			<Body onClick={() => {console.log(iconsList)}}>
 				{iconsList.map((icon, i) => {
 					return (
 						<SCCardIcons 
