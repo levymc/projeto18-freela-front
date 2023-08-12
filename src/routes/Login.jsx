@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Carousel from 'react-bootstrap/Carousel'
 import { useAuth } from '../components/AuthContext';
@@ -11,7 +11,7 @@ import { simpleModal } from '../components/modais'
 
 
 export default function Login() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado, loggedUsers, setLoggedUsers } = useAuth();
+	const { telaAcesso, setTelaAcesso, logado, setLogado, loggedUser, setLoggedUser } = useAuth();
 
     const navigateTo = useNavigate()
 
@@ -19,7 +19,8 @@ export default function Login() {
         axios.post('http://localhost:5000/signin', data).then(res => {
             localStorage.setItem(data.userId, data);
             setLogado(true)
-            setLoggedUsers(loggedUsers => [...loggedUsers, res.data]);
+            setTelaAcesso(false)
+            setLoggedUser(res.data);
             simpleModal("Login realizado", "success").then(() => navigateTo('/'))
         }).catch(err => {
             console.error(err.response)
@@ -27,9 +28,18 @@ export default function Login() {
         })
     }
 
+    useEffect(() => {
+        if (!telaAcesso) {
+            navigateTo('/');
+        }
+    }, [telaAcesso]);
+    
+
 	return (
 		<Div height={'100vh'}>
-			<Body>
+			<Body onClick={() => {
+                console.log(logado, telaAcesso)
+            }}>
                 <SCForm onSubmit={(event) => {
                     event.preventDefault()
                     const formData = {

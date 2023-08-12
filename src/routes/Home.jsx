@@ -14,7 +14,9 @@ export default function Home() {
 
 	return (
 		<Div height={'100vh'}>
-			<Body>
+			<Body onClick={() => {
+                console.log(logado, telaAcesso)
+            }}>
 				{iconsList.map((icon, i) => {
 					return (
 						<SCCardIcons 

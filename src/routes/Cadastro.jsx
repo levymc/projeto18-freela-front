@@ -52,9 +52,10 @@ export default function Cadastro() {
     }
 
     useEffect(() => {
-        console.log(cepValue)
-    }, [cepValue])
-
+        if (!telaAcesso) {
+            navigateTo('/');
+        }
+    }, [telaAcesso]);
     
 
 	return (

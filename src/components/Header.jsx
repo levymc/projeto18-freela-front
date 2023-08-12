@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
@@ -11,16 +11,41 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import axios from 'axios'
+import { simpleModal } from './modais';
 
 
 export default function Header() {
-    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
+    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen, loggedUser, setLoggedUser  } = useAuth();
     const [ firstAccess, setFirstAccess ] = useState(false);
     const navigateTo = useNavigate()
 
+    const handleLogOut = () => {
+        axios.post('http://localhost:5000/logout', {}, {
+            headers: {
+                'Authorization': `Bearer ${loggedUser.token}`
+            }
+        }).then(res => {
+            navigateTo('/login')
+            setTelaAcesso(true)
+            setLogado(false)
+            setLoggedUser(null)
+        }).catch(err => {
+            console.error(err.response)
+            simpleModal(err.response.data, "error")
+        })
+    }
+
+    useEffect(() => {
+        if (!firstAccess && !telaAcesso) {
+            modalHome(setFirstAccess);
+        }
+    }, [firstAccess, telaAcesso]);
+
     return (
-        <>
-            { !firstAccess && modalHome(setFirstAccess)} 
+        <> 
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
@@ -35,43 +60,57 @@ export default function Header() {
                                             />
                                         </Tooltip> 
                                         : <StyledLink to="/">
-                                        <Tooltip arrow title="Pagina Inicial">
-                                            <ArrowBackIcon 
-                                                onClick={() => setTelaAcesso(false)} 
-                                                height="30px" width="30px"
-                                                color={`#FFF4F4`}
-                                                cursor={'pointer'}
-                                            />
+                                            <Tooltip arrow title="Pagina Inicial">
+                                                <ArrowBackIcon 
+                                                    onClick={() => {
+                                                        setTelaAcesso(false)
+                                                        modalHome(setFirstAccess);
+                                                    }
+                                                    } 
+                                                    height="30px" width="30px"
+                                                    color={`#FFF4F4`}
+                                                    cursor={'pointer'}
+                                                />
                                             </Tooltip> 
                                         </StyledLink>
                         }
                     </SecEsquerda>
                     <SecDireita>
-                        {!telaAcesso 
-                            ? <StyledLink to="/login">
-                                <Tooltip arrow title="Login">
-                                    <PersonIcon 
-                                        height="30px" width="30px" 
-                                        color={`#FFF4F4`}
-                                        onClick={() => setTelaAcesso(true)} 
-                                    /></Tooltip> 
-                                </StyledLink>
-                                : null }
-                        {!logado 
-                                ? <Tooltip arrow title="Criar conta">
-                                    <SCPersonAdd 
-                                        color = {`#FFF4F4`}
-                                        onClick = { () => navigateTo('/cadastro') }
-                                    />
-                                </Tooltip>
-                                : <Tooltip arrow title="Carrinho">
+                        { logado 
+                            ? <>
+                                <Tooltip arrow title="Carrinho">
                                     <CartIcon
-                                        height="30px" width="30px" 
-                                        color={`#FFF4F4`}
                                         onClick={modalCarrinho}
                                     />
                                 </Tooltip>
-                                }
+                                <Tooltip arrow title="Deslogar">
+                                    <SCLogoutIcon
+                                        onClick={handleLogOut}
+                                     />
+                                </Tooltip>
+                            </>
+                            : (!telaAcesso 
+                                ? <StyledLink to="/login">
+                                    <Tooltip arrow title="Login">
+                                        <PersonIcon 
+                                            height="30px" width="30px" 
+                                            color={`#FFF4F4`}
+                                            onClick={() => setTelaAcesso(true)} 
+                                        /></Tooltip> 
+                                    </StyledLink>
+                                : null) 
+                        }
+                        {!logado 
+                            && <Tooltip arrow title="Criar conta">
+                                <SCPersonAdd 
+                                    color = {`#FFF4F4`}
+                                    onClick = { () => {
+                                        navigateTo('/cadastro')
+                                        setTelaAcesso(true)
+                                    } }
+                                />
+                            </Tooltip>
+                        }
                     </SecDireita>
                 </DivLogo>
                 </HeaderContainer>
@@ -94,6 +133,9 @@ const SCMenuIcon = styled(MenuIcon)`
     cursor: pointer;
 `
 const CartIcon =styled(ShoppingCartIcon)`
+    cursor: pointer;
+`
+const SCLogoutIcon =styled(LogoutIcon)`
     cursor: pointer;
 `
 
@@ -131,7 +173,7 @@ const SecDireita = styled.section`
     align-items: center;
     display: flex;
     justify-content: center;
-    gap: 0.5em;
+    gap: 1em;
 `
 
 const DivLogo = styled.div`
