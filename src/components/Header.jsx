@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { Menu, ArrowBack, Person, PersonAdd, CartOutline } from 'react-ionicons'
 import styled from 'styled-components';
@@ -11,12 +11,37 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import { simpleModal } from './modais';
 
 export default function Header() {
     const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen  } = useAuth();
     const [ firstAccess, setFirstAccess ] = useState(false);
     const navigateTo = useNavigate()
+
+
+  useEffect(() => {
+    let timeout;
+
+
+    const handleUserInactive = () => {
+        simpleModal("Você ainda está ai?", "question")
+        // setLogado(false)
+        // setTelaAcesso(true)
+        // navigateTo("/login")
+    }
+    const resetTimeout = () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(handleUserInactive, 5 * 60 * 1000) // min * seg * ms
+    }
+    window.addEventListener('mousemove', resetTimeout)
+    window.addEventListener('keydown', resetTimeout)
+    resetTimeout()
+    return () => {
+        window.removeEventListener('mousemove', resetTimeout)
+        window.removeEventListener('keydown', resetTimeout)
+        clearTimeout(timeout)
+    }
+  }, [])
 
     return (
         <>

@@ -22,10 +22,23 @@ export const modalCarrinho = () => {
 
 export const modalHome = (setFirstAccess) => {
     Swal.fire({
-        title: "Bem vindo!",
+        title: "Seja bem vinda(o) ao Get Samurais!",
+        text: "Lugar de felicidade",
         confirmButtonColor: "#FF6500",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
     }).then(res => {
         res.isConfirmed && setFirstAccess(true)
+    })
+}
+
+export const modalServico = () => {
+    return Swal.fire({
+        title: title,
+        icon: icon,
+        confirmButtonColor: "#FF6500",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
     })
 }
 
@@ -34,5 +47,7 @@ export const simpleModal = (title, icon) => {
         title: title,
         icon: icon,
         confirmButtonColor: "#FF6500",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
     })
 }

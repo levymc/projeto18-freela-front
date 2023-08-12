@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Carousel from 'react-bootstrap/Carousel'
 import { useAuth } from '../components/AuthContext';
@@ -7,10 +7,27 @@ import { ConstructOutline } from 'react-ionicons'
 import Form from 'react-bootstrap/Form';
 import CardIcons from '../components/CardIcons';
 import iconsList from '../components/dto/menuCategoriaIcons';
+import axios from 'axios'
+import { simpleModal } from '../components/modais';
+import HTMLReactParser from 'html-react-parser';
+
 
 export default function Home() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
+	const [ categorias, setCategorias ] = useState([])
 
+	// const parse = new HTMLReactParser()
+
+	// useEffect(() => {
+	// 	axios.get('http://localhost:5000/categorias').then(res => {
+	// 		console.log(res.data)
+	// 		setCategorias(res.data)
+	// 	}).catch(err => {
+	// 		console.error(err.response)
+	// 		simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
+	// 	})
+	// }, [])
+	
 
 	return (
 		<Div height={'100vh'}>
@@ -19,7 +36,7 @@ export default function Home() {
 					return (
 						<SCCardIcons 
 							icon = {icon.icon} 
-							text = {icon.text}
+							text = {icon.descricao}
 							id = {icon.id}
 							key = {i}
 						/>

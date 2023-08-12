@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import axios from 'axios'
 
 
 export default function CardIcons(props) {
+
+    const handleService = () => {
+
+    }
+
 	return (
             <Card>
                 <SectionIcon>
@@ -13,7 +19,9 @@ export default function CardIcons(props) {
                     {props.text}
 
                 </DivText>
-                <SCButton>
+                <SCButton onClick = {() => {
+                    handleService()
+                }}>
                     Contratar
                 </SCButton>
             </Card>		
