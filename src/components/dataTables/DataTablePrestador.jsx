@@ -23,7 +23,7 @@ export default function DataTablePrestadores(props) {
                     'Authorization': `Bearer ${loggedUser.token}`,
                     'categoriaId': props.categoriaId
                 }}).then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setPrestadores(res.data)
                 }).catch(err => {
                     console.error(err.response)
@@ -32,8 +32,25 @@ export default function DataTablePrestadores(props) {
 	}, [])
 
     const handleContract = (prestadorId, prestadorName) => {
-        const categoriaId = props.categoriaId
-        simpleModal("Deseja solicitar o serviço com o prestador: " + prestadorName, "question")
+        simpleModal("Deseja solicitar o serviço com o prestador: " + prestadorName, "question").then(res => {
+            if(res.isConfirmed){
+                axios.post('http://localhost:5000/solicitarServico',{
+                    categoriaId: props.categoriaId,
+                    prestadorId: prestadorId,
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${loggedUser.token}`,
+                    }}).then(res => {
+
+                    }).catch(err => {
+                        console.error(err.response)
+                        simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
+                    })
+            }
+        }).catch(err => {
+            console.error(err)
+            simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
+        })
     };
 
     const columns = [
