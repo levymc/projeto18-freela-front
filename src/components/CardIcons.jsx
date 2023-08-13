@@ -2,16 +2,23 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import axios from 'axios'
-import { modalServico } from './modais';
+import { modalServico, simpleModal } from './modais';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 
 export default function CardIcons(props) {
+    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen, loggedUser, setLoggedUser  } = useAuth();
     const navigateTo = useNavigate()
 
     const handleService = () => {
         console.log(props.text, props.id)
-        navigateTo('/categoria/'+props.id)
+        if ( !loggedUser ){
+            simpleModal("Para continuar, faça o login ou cadastre-se", "warning")
+            navigateTo('/')
+        }else{
+            navigateTo('/categoria/'+props.id)
+        }
     }
 
 	return (

@@ -57,11 +57,11 @@ export default function Cadastro() {
         setCadastrarPrestador(e.target.checked)
     }
 
-    useEffect(() => {
-        if (!telaAcesso) {
-            navigateTo('/');
-        }
-    }, [telaAcesso]);
+    // useEffect(() => {
+    //     if (!telaAcesso) {
+    //         navigateTo('/');
+    //     }
+    // }, [telaAcesso]);
     
 
 	return (
@@ -81,7 +81,7 @@ export default function Cadastro() {
                     cidade: achouCep ? event.target.cidade.value : null,
                     estado: achouCep ? event.target.estado.value : null,
                     permission: cadastrarPrestador ? 2 : 1,
-                    servico: cadastrarPrestador ? event.target.cadastroPrestadorInput.value : null,
+                    servico: cadastrarPrestador ? event.target.cadastroPrestadorInput.value : "",
                 };
                 handleSubmit(formData);
             }}>

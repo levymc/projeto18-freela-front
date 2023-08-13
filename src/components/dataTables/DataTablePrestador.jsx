@@ -2,22 +2,39 @@ import DataTable from 'react-data-table-component';
 import styled from 'styled-components';
 import { TrashOutline } from 'react-ionicons'
 import ReactDOMServer from 'react-dom/server';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../AuthContext'
+import { simpleModal } from '../modais';
+import axios from 'axios'
 
-export default function DataTablePrestadores() {
+export default function DataTablePrestadores(props) {
     const iconHtml = ReactDOMServer.renderToString(<TrashOutline />)
+	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias, loggedUser, setLoggedUser } = useAuth();
+
+    const [prestadores, setPrestadores] = useState()
+
+    useEffect(() => {
+		logado && axios.get('http://localhost:5000/prestadores', {
+            headers: {
+                    'Authorization': `Bearer ${loggedUser.token}`,
+                    'categoriaId': props.categoriaId
+                }}).then(res => {
+                    console.log(res.data)
+                    setPrestadores(res.data)
+                }).catch(err => {
+                    console.error(err.response)
+                    simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
+                })
+	}, [])
 
     const columns = [
         {
-            name: 'Serviços',
-            selector: row => row.title,
-        },
-        {
-            name: 'Valor',
-            selector: row => row.year,
-        },
-        {
             name: 'Prestador',
-            selector: row => row.prestador,
+            selector: row => row.nome,
+        },
+        {
+            name: 'Email',
+            selector: row => row.email,
         },
         {
             name: '',
@@ -30,37 +47,24 @@ export default function DataTablePrestadores() {
         },
     ];
 
-    const data = [
-        {
-            id: 1,
-            title: 'Serviços',
-            year: '1988',
-            prestador: 'Frederico',
-        },
-        {
-            id: 2,
-            title: 'Valor',
-            year: '1984',
-            prestador: 'Frederico',
-        },
-        {
-            id: 3,
-            title: 'Valor',
-            year: '1984',
-            prestador: 'Frederico',
-        },
-    ];
+    // const data = prestadores.map((prestador, i) => ({
+    //     id: prestador.id,
+    //     nome: prestador.nome,
+    //     email: prestador.email
+    // }))
     const customStyles = {
         rows: {
             style: {
                 minHeight: '72px',
+                backgroundColor: 'RGB(250, 250, 251)',
             },
         },
         headCells: {
             style: {
                 paddingLeft: '8px',
                 paddingRight: '8px',
-                fontSize: '1.6em'
+                fontSize: '1.6em',
+                backgroundColor: 'RGB(250, 250, 251)',
             },
         },
         cells: {
@@ -74,15 +78,19 @@ export default function DataTablePrestadores() {
     return (
         <StyledDataTable
             columns={columns}
-            data={data}
+            data={prestadores}
             customStyles={customStyles}
         />
     );
 };
 
 const StyledDataTable = styled(DataTable)`
-    margin-top: 2em; margin-bottom: 2em;
     font-size: 16px;
+    background-color: RGB(250, 250, 251) !important;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+
 `
 const IconContainer = styled.div`
     display: flex;

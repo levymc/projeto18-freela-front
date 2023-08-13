@@ -12,7 +12,7 @@ import iconsList from '../components/dto/menuCategoriaIcons';
 import DataTablePrestadores from '../components/dataTables/DataTablePrestador';
 
 export default function Login() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
+	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias, loggedUser, setLoggedUser } = useAuth();
 
     const [ selectPickerValue, setSelectPickerValue ] = useState(null)
     const [ categoriaServicos, setCategoriaServicos ] = useState(null)
@@ -22,7 +22,10 @@ export default function Login() {
 
     const id = location.pathname.split('/categoria/')[1]
     useEffect(() => {
-        axios.get(`http://localhost:5000/categoria/${id}`).then(res => {
+        logado && axios.get(`http://localhost:5000/categoria/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${loggedUser.token}`
+            }}).then(res => {
             console.log(res.data)
             setCategoriaServicos(res.data)
         }).catch(err => {
@@ -31,11 +34,11 @@ export default function Login() {
         })
     },[])
 
-    // useEffect(() => {
-    //     if (!telaAcesso) {
-    //         navigateTo('/');
-    //     }
-    // }, [telaAcesso]);
+    useEffect(() => {
+        if (!logado) {
+            navigateTo('/');
+        }
+    }, [telaAcesso]);
     
 
 	return (
@@ -65,7 +68,7 @@ export default function Login() {
                         )}
                         {selectPickerValue 
                         ? ( <ContainerPrestadores>
-                                <DataTablePrestadores />
+                                <DataTablePrestadores categoriaId={id} />
                             </ContainerPrestadores>)
                         : null
                         }
@@ -78,7 +81,8 @@ export default function Login() {
 }
 
 const ContainerPrestadores = styled.div`
-    width: 80%;
+    width: 100%;
+    margin: auto;
 `
 
 const Div = styled.div`
