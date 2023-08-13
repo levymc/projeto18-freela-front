@@ -11,14 +11,16 @@ export const modalCarrinho = (itensCarrinho) => {
                                 <th>Prestador</th>
                                 <th>Categoria Serviço</th>
                                 <th>Preço</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             ${itensCarrinho.map((item, i) => `
                                 <tr key=${i}>
-                                    <td>${item.prestadorId}</td>
+                                    <td>${item.prestadorName}</td>
                                     <td>${item.categoriaNome}</td>
-                                    <td>${item.preco}</td>
+                                    <td>${item.price}</td>
+                                    <td><ion-icon name="trash-outline"></ion-icon></td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -27,20 +29,20 @@ export const modalCarrinho = (itensCarrinho) => {
                     
     
     Swal.fire({
-
         title: "<strong>Serviços Solicitados!</strong>",
         html: html,
         confirmButtonColor: `RGB(255, 101, 0)`,
-        confirmButtonText: "Finalizar pedido",
+        confirmButtonText: itensCarrinho.length != 0 ? "Finalizar pedido" : "Voltar",
         showCloseButton: true,
-        showCancelButton: true,
+        showCancelButton: itensCarrinho.length != 0 ? true : false,
         cancelButtonText: 'Cancelar',
         allowEscapeKey: false,
         allowOutsideClick: false,
         padding: '1.5em',
-        width: '60vw',
+        width: itensCarrinho.length != 0 ? '60vw' : '40vw',
     });
 }
+
 
 export const modalHome = (setFirstAccess) => {
     Swal.fire({

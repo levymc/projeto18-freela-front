@@ -33,7 +33,7 @@ export default function DataTablePrestadores(props) {
                 })
 	}, [])
 
-    const handleContract = (prestadorId, prestadorName) => {
+    const handleContract = (prestadorId, prestadorName, price) => {
         simpleModal("Deseja solicitar o serviço com o prestador: " + prestadorName, "question").then(res => {
             if(res.isConfirmed){
                 axios.post('http://localhost:5000/solicitarServico',{
@@ -44,6 +44,8 @@ export default function DataTablePrestadores(props) {
                         'Authorization': `Bearer ${loggedUser.token}`,
                     }}).then(res => {
                         res.data.categoriaNome = props.categoriaNome
+                        res.data.prestadorName = prestadorName
+                        res.data.price = price
                         setItensCarrinho([...itensCarrinho, res.data])
                         navigateTo('/')
                     }).catch(err => {
@@ -75,7 +77,12 @@ export default function DataTablePrestadores(props) {
         {
             name: 'Solicitar Serviço',
             cell: row => (
-                <SCButton onClick={() => handleContract(row.id, row.nome)}>Solicitar</SCButton>
+                <SCButton onClick={() => handleContract(
+                                                            row.id, 
+                                                            row.nome,
+                                                            "R$" + row.precoMin.toFixed(2).replace(".",",") +
+                                                            " ~ " + "R$" + row.precoMax.toFixed(2).replace(".",",") 
+                                                        )}>Solicitar</SCButton>
             ),
         },
         {
