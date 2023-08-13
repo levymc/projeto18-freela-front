@@ -14,7 +14,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios'
-import { simpleModal } from './modais';
+import { simpleModal, simpleModalText } from './modais';
 
 
 export default function Header() {
@@ -25,33 +25,33 @@ export default function Header() {
             loggedUser, setLoggedUser, 
             itensCarrinho, setItensCarrinho   
         } = useAuth();
-    const [ firstAccess, setFirstAccess ] = useState(false);
+    const [ firstAccess, setFirstAccess ] = useState(false)
+
     const navigateTo = useNavigate()
 
 
-  useEffect(() => {
-    let timeout;
+    useEffect(() => {
+        let timeout
+        const handleUserInactive = () => {
+            simpleModal("Você ainda está ai?", "question")
+            // setLogado(false)
+            // setTelaAcesso(true)
+            // navigateTo("/login")
+        }
+        const resetTimeout = () => {
+            clearTimeout(timeout)
+            timeout = setTimeout(handleUserInactive, 5 * 60 * 1000) // min * seg * ms
+        }
+        window.addEventListener('mousemove', resetTimeout)
+        window.addEventListener('keydown', resetTimeout)
+        resetTimeout()
+        return () => {
+            window.removeEventListener('mousemove', resetTimeout)
+            window.removeEventListener('keydown', resetTimeout)
+            clearTimeout(timeout)
+        }
+    }, [])
 
-
-    const handleUserInactive = () => {
-        simpleModal("Você ainda está ai?", "question")
-        // setLogado(false)
-        // setTelaAcesso(true)
-        // navigateTo("/login")
-    }
-    const resetTimeout = () => {
-        clearTimeout(timeout)
-        timeout = setTimeout(handleUserInactive, 5 * 60 * 1000) // min * seg * ms
-    }
-    window.addEventListener('mousemove', resetTimeout)
-    window.addEventListener('keydown', resetTimeout)
-    resetTimeout()
-    return () => {
-        window.removeEventListener('mousemove', resetTimeout)
-        window.removeEventListener('keydown', resetTimeout)
-        clearTimeout(timeout)
-    }
-  }, [])
     const handleLogOut = () => {
         axios.post('http://localhost:5000/logout', {}, {
             headers: {
@@ -67,6 +67,13 @@ export default function Header() {
             simpleModal(err.response.data, "error")
         })
     }
+
+    const handleFinalizarPedido = () => {
+        simpleModalText("Serviços solicitados com sucesso!",
+                        "Em breve o prestador irá entrar com contato, via email, para combinarem a data",
+                         "success")
+    }
+
 
 
     useEffect(() => {
@@ -117,7 +124,7 @@ export default function Header() {
                                     <CartIcon
                                         onClick={() => {
                                             modalCarrinho(itensCarrinho, setItensCarrinho, loggedUser.token).then(res => {
-                                                // apagar do banco o servico solicitado
+                                                res.isConfirmed && handleFinalizarPedido()
                                             }).catch(err => {
                                                 console.error(err)
                                                 simpleModal("Ocorreu algum erro no carrinho, tente novamente", "error")

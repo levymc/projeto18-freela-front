@@ -15,6 +15,17 @@ export const simpleModal = (title, icon) => {
     })
 }
 
+export const simpleModalText = (title, text, icon) => {
+    return Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        confirmButtonColor: "#FF6500",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+    })
+}
+
 export const simpleModalCancelar = (title, icon) => {
     return Swal.fire({
         title: title,
@@ -37,6 +48,11 @@ const handleDeleteService = (data, token) => {
 
 
 export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
+    let total = 0;
+    itensCarrinho.forEach(element => {
+        total += parseFloat(element.price)
+        console.log(total)           
+    })
     const html = itensCarrinho.length === 0 ? "Você ainda não solicitou nenhum serviço!!"
                 : `<div class="tableCarrinho">
                     <table>
@@ -53,10 +69,16 @@ export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
                                 <tr key=${i}>
                                     <td>${item.prestadorName}</td>
                                     <td>${item.categoriaNome}</td>
-                                    <td>${item.price}</td>
+                                    <td>R$ ${item.price}</td>
                                     <td><ion-icon id="${item.id}" name="trash-outline"></ion-icon></td>
                                 </tr>
                             `).join('')}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><strong>TOTAL</strong></td>
+                                <td><strong>R$ ${total.toFixed(2).replace(".", ",")}</strong></td>
+                            </tr>
                         </tbody>
                     </table>
                     </div>`
@@ -95,7 +117,7 @@ export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
                     })
                 })
             }
-        }
+        },
     });
 }
 

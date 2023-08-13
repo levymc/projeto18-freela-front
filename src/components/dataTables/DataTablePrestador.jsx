@@ -80,8 +80,7 @@ export default function DataTablePrestadores(props) {
                 <SCButton onClick={() => handleContract(
                                                             row.id, 
                                                             row.nome,
-                                                            "R$" + row.precoMin.toFixed(2).replace(".",",") +
-                                                            " ~ " + "R$" + row.precoMax.toFixed(2).replace(".",",") 
+                                                            (row.precoMin + row.precoMax).toFixed(2).replace(".",",") 
                                                         )}>Solicitar</SCButton>
             ),
         },
