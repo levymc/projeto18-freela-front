@@ -69,9 +69,10 @@ export default function Header() {
     }
 
     const handleFinalizarPedido = () => {
-        simpleModalText("Serviços solicitados com sucesso!",
+        itensCarrinho.length > 0 && simpleModalText("Serviços solicitados com sucesso! Obrigado por confiar em nós!",
                         "Em breve o prestador irá entrar com contato, via email, para combinarem a data",
                          "success")
+        setItensCarrinho([])
     }
 
 
