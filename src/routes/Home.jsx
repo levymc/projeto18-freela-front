@@ -34,21 +34,32 @@ export default function Home() {
 	return (
 		<Div height={'100vh'}>
 			<Body onClick={() => {console.log(itensCarrinho)}}>
-				{iconsList.map((icon, i) => {
-					return (
-						<SCCardIcons 
-							icon = {icon.icon} 
-							text = {icon.descricao}
-							id = {icon.id}
-							key = {i}
-						/>
-					)
-				})}
+				<h4>O que você precisa?</h4>
+				<SCDiv>
+					{iconsList.map((icon, i) => {
+						return (
+							<SCCardIcons 
+								icon = {icon.icon} 
+								text = {icon.descricao}
+								id = {icon.id}
+								key = {i}
+							/>
+						)
+					})}
+				</SCDiv>
 
 			</Body>
 		</Div>
 	);
 }
+
+const SCDiv = styled.div`
+	display: flex;
+    justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 2em;
+`
 
 const SCCardIcons = styled(CardIcons)`
 	transition: all 0.3s ease-in;
@@ -74,9 +85,8 @@ const Body = styled.div`
 	position: absolute;
 	display: flex;
     justify-content: center;
-	flex-wrap: wrap;
-	gap: 2em;
-
+	flex-direction: column;
+	gap: 1em;
     height: auto;
     width: 80%;
     margin: 0 auto;
@@ -88,6 +98,11 @@ const Body = styled.div`
 	}
 	h3{
 		color: black;
+	}
+	h4{
+		text-align: center;
+		color:#f8f8f8;
+		user-select: none;
 	}
 `;
 const Card = styled.div`

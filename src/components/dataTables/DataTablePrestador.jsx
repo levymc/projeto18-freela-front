@@ -5,7 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'
-import { simpleModal } from '../modais';
+import { simpleModal, simpleModalButton } from '../modais';
 import axios from 'axios'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { Button } from 'react-bootstrap';
@@ -34,7 +34,7 @@ export default function DataTablePrestadores(props) {
 	}, [])
 
     const handleContract = (prestadorId, prestadorName, price) => {
-        simpleModal("Deseja solicitar o serviço com o prestador: " + prestadorName, "question").then(res => {
+        simpleModalButton("Deseja solicitar o serviço com o prestador: " + prestadorName, "Confirmar", "question").then(res => {
             if(res.isConfirmed){
                 axios.post('http://localhost:5000/solicitarServico',{
                     categoriaId: props.categoriaId,

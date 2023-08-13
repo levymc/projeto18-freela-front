@@ -10,7 +10,7 @@ export default function SideBar() {
     const { isOpen, setIsOpen } = useAuth();
 
     return (
-        <SideBarContainer isopen={isOpen}>
+        <SideBarContainer isopen={isOpen ? '0' : '-18em'}>
             <SecIcon>
                 <SCClose
                     onClick={() => setIsOpen(false)}
@@ -20,7 +20,7 @@ export default function SideBar() {
             </SecIcon>
             {buttons.map((button, i) => {
                 return (
-                    <>
+
                     <SideBarBtn 
                         text = {button.text}
                         idCollapsed = {button.idCollapsed}
@@ -28,7 +28,7 @@ export default function SideBar() {
                         last = {button.last ? true : false}
                         key = {i}
                     />
-                    </>
+
                 )
             })}
         </SideBarContainer>
@@ -38,7 +38,7 @@ export default function SideBar() {
 const SideBarContainer = styled.div`
     position: fixed;
     top: 0;
-    left: ${props => (props.isopen ? '0' : '-18em')};
+    left: ${props => (props.isopen )};
     width: 18em;
     height: 100vh;
     background-color: RGB(255, 101, 0);

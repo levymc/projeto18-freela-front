@@ -12,7 +12,7 @@ export default function CollapsedBtns (props) {
                             <Button 
                                 key = {i}
                                 id = {element.idSubBtn}
-                                last = {element.last ? element.last : false}
+                                last = {element.last ? `1px solid #fafafb6c` : '0'}
                             >{element.subText}</Button>
                     )
                 })}
@@ -27,7 +27,7 @@ const Button = styled.button`
     border-top: 1px solid #fafafb6c; 
     border-left: 0; border-right: 0;
     border-radius: 0;
-    border-bottom: ${props => (props.last ? `1px solid #fafafb6c` : '0')}; 
+    border-bottom: ${props => (props.last )}; 
     position: relative;
     display: flex;
     align-items: center;

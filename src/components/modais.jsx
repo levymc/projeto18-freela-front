@@ -15,6 +15,17 @@ export const simpleModal = (title, icon) => {
     })
 }
 
+export const simpleModalButton = (title, textButton, icon) => {
+    return Swal.fire({
+        title: title,
+        icon: icon,
+        confirmButtonColor: "#FF6500",
+        confirmButtonText: textButton,
+        showCloseButton: true,
+        showCancelButton: true,
+    })
+}
+
 export const simpleModalText = (title, text, icon) => {
     return Swal.fire({
         title: title,
@@ -124,8 +135,8 @@ export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
 
 export const modalHome = (setFirstAccess) => {
     Swal.fire({
-        title: "Seja bem vinda(o) ao Get Samurais!",
-        text: "Lugar de felicidade",
+        title: "Seja bem-vindo(a) ao Get Serviços!",
+        text: "Seu lugar de conexões.",
         confirmButtonColor: "#FF6500",
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -133,6 +144,7 @@ export const modalHome = (setFirstAccess) => {
         res.isConfirmed && setFirstAccess(true)
     })
 }
+
 
 export const modalServico = (title, icon) => {
     return Swal.fire({

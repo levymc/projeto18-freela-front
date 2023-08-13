@@ -36,7 +36,7 @@ export default function Login() {
     
 
 	return (
-		<Div height={'100vh'}>
+		<Div >
 			<Body onClick={() => {
                 console.log(logado, telaAcesso)
             }}>
@@ -81,7 +81,7 @@ const LinkNewAccount = styled(Link)`
     display: flex;
     justify-content: center;
     color: #1e1eec !important;
-    width: 15vw;
+    width: 20em;
     span:hover{
         color: #8484f7 !important;
     }
@@ -91,45 +91,50 @@ const LinkNewAccount = styled(Link)`
 `
 const SubmitBtn = styled(Button)`
     position:relative;
+    bottom: -5%;
     padding: 0.2em 1.5em 0.2em 1.5em;
     right: -30%;
 `
 
 const SCForm = styled(Form)`
     /* position: relative; */
-    width: 60%;
-    top: 2em;
+    /* top: 2em; */
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-`
+    .form-control {
+        width: 30em !important;
+    }
+`;
+
 
 const Div = styled.div`
     display: flex;
     justify-content: center;
-    width: 100%;
-    height: ${props => props.height};
+    overflow-y: auto;
+    width: 40vw;
+    min-height: 100vh;
+    height: auto;
 	background-color: RGB(0, 26, 61);
+    padding-bottom: 5vh;
+    overflow-y: hidden;
+	padding-top: 20vh;
 `;
 
 const Body = styled.div`
-    position: absolute;
-    top: 12em;
+   /* position: absolute; */
 	display: flex;
-    /* justify-content: center; */
-	flex-direction: column;
-    align-items: center;
-    width: 30%;
+    justify-content: center;
+	flex-wrap: wrap;
+	gap: 2em;
+
+    padding: 4em;
+    width: 100%;
+    height: 60%;
     background-color: RGB(250, 250, 251);
-	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212);
-    margin: 0 auto;
-    padding: 2em 0; 
+	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 
     border-radius: 10px;
     color: black;
-	.imgSlide{
-		width: 900px !important;
-		height: 500px !important;
-	}
 `;

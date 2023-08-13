@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import axios from 'axios'
-import { modalServico, simpleModal } from './modais';
+import { modalServico, simpleModalButton } from './modais';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
@@ -14,8 +14,10 @@ export default function CardIcons(props) {
     const handleService = () => {
         console.log(props.text, props.id)
         if ( !loggedUser ){
-            simpleModal("Para continuar, faça o login ou cadastre-se", "warning")
-            navigateTo('/')
+            simpleModalButton("Para continuar, faça o login ou cadastre-se", "Faça o Login", "warning").then((res) => {
+                setTelaAcesso(true)
+                res.isConfirmed && navigateTo('/login')
+            })
         }else{
             navigateTo('/categoria/'+props.id)
         }
