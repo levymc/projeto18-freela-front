@@ -14,6 +14,7 @@ import iconsList from '../components/dto/menuCategoriaIcons';
 export default function Login() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
 
+    const [ selectPickerValue, setSelectPickerValue ] = useState(null)
     const [ categoriaServicos, setCategoriaServicos ] = useState(null)
 
     const location = useLocation()
@@ -44,19 +45,29 @@ export default function Login() {
             : <Div height={'100vh'}>
                     <Body >
                         <h1>Serviços de {categoriaServicos.categoria.descricao}</h1>
-                        <div>
-                            <span>Selecione abaixo, o tipo de serviço desejado.</span>
-                        </div>
-
-                        <Form.Select aria-label="Default select example">
-                            <option disabled>Serviços</option>
-                            {categoriaServicos.servicos.map((servico, i) => {
-                                return (
-                                    <option key={i+1} value={servico.id}>{servico.descricao}</option>
-                                )
-                            })}
-                            <option value={0}>Outro...</option>
-                        </Form.Select>
+                        <Form.Group className="mb-3" controlId="selectPicker">
+                            <Form.Label>Selecione abaixo, o tipo de serviço desejado</Form.Label>
+                            <Form.Select onChange={(e) => setSelectPickerValue(parseInt(e.target.value))} aria-label="Default select example">
+                                <option disabled>Serviços</option>
+                                {categoriaServicos.servicos.map((servico, i) => {
+                                    return (
+                                        <option key={i+1} value={servico.id}>{servico.descricao}</option>
+                                    )
+                                })}
+                                <option value={0}>Outro...</option>
+                            </Form.Select>
+                        </Form.Group>
+                        {selectPickerValue === 0 && (
+                            <Form.Group className="mb-3" controlId="outroServ">
+                                <Form.Label>Descreva o serviço para analisarmos</Form.Label>
+                                <Form.Control  as="textarea" rows={3} placeholder="Descrição do serviço" />
+                            </Form.Group>
+                        )}
+                        {selectPickerValue > 0 && (
+                            <ContainerPrestadores>
+                                
+                            </ContainerPrestadores>
+                        )}
                     </Body>
                 </Div>
             }
@@ -64,6 +75,10 @@ export default function Login() {
 		
 	);
 }
+
+const ContainerPrestadores = styled.div`
+    width: 80%;
+`
 
 const Div = styled.div`
     display: flex;
