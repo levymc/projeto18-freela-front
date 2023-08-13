@@ -6,6 +6,10 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext'
 import { simpleModal } from '../modais';
 import axios from 'axios'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { Button } from 'react-bootstrap';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function DataTablePrestadores(props) {
     const iconHtml = ReactDOMServer.renderToString(<TrashOutline />)
@@ -42,21 +46,26 @@ export default function DataTablePrestadores(props) {
                              " ~ " + "R$" + row.precoMax.toFixed(2).replace(".",",") ,
         },
         {
+            name: 'Solicitar Serviço',
+            cell: row => (
+                <SCButton>Solicitar</SCButton>
+            ),
+            // width: `6em`
+        },
+        {
             name: '',
             cell: row => (
                 <IconContainer>
-                    <StyledTrashIcon color={'red'} />
+                    <Tooltip arrow title="Enviar email para o Prestador">
+                        <StyledEmail />
+                    </Tooltip>
                 </IconContainer>
             ),
             width: `2em`
         },
-    ];
+        
+    ]
 
-    // const data = prestadores.map((prestador, i) => ({
-    //     id: prestador.id,
-    //     nome: prestador.nome,
-    //     email: prestador.email
-    // }))
     const customStyles = {
         rows: {
             style: {
@@ -79,7 +88,8 @@ export default function DataTablePrestadores(props) {
                 fontSize: '1.2em'
             },
         },
-    };
+    }
+
     return (
         <StyledDataTable
             columns={columns}
@@ -88,6 +98,15 @@ export default function DataTablePrestadores(props) {
         />
     );
 };
+
+const SCButton = styled(Button)`
+    padding: 5px;
+    font-size: 14px;
+    font-family: Ubuntu;
+    background-color: RGB(255, 101, 0);
+    margin: auto;
+    border: 0;
+`
 
 const StyledDataTable = styled(DataTable)`
     font-size: 16px;
@@ -98,12 +117,19 @@ const StyledDataTable = styled(DataTable)`
 
 `
 const IconContainer = styled.div`
-    display: flex;
-    justify-content: end;
-    align-items: center;
+    left: 0;
+    position: absolute;
 
 `;
-const StyledTrashIcon = styled(TrashOutline)`
+const StyledEmail = styled(EmailOutlinedIcon)`
     cursor: pointer;
     margin: auto;
+    left: -1em;
+    position: relative;
+    color: #0160B1;
+`
+const StyledCheck = styled(CheckOutlinedIcon)`
+    cursor: pointer;
+    margin: auto;
+    color: #018001 !important;
 `
