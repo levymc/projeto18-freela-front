@@ -9,7 +9,7 @@ import axios from 'axios'
 import { simpleModal } from '../components/modais'
 import ReactLoading from 'react-loading';
 import iconsList from '../components/dto/menuCategoriaIcons';
-
+import DataTablePrestadores from '../components/dataTables/DataTablePrestador';
 
 export default function Login() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
@@ -48,7 +48,7 @@ export default function Login() {
                         <Form.Group className="mb-3" controlId="selectPicker">
                             <Form.Label>Selecione abaixo, o tipo de serviço desejado</Form.Label>
                             <Form.Select onChange={(e) => setSelectPickerValue(parseInt(e.target.value))} aria-label="Default select example">
-                                <option disabled>Serviços</option>
+                                <option>Selecione um Serviço</option>
                                 {categoriaServicos.servicos.map((servico, i) => {
                                     return (
                                         <option key={i+1} value={servico.id}>{servico.descricao}</option>
@@ -63,11 +63,12 @@ export default function Login() {
                                 <Form.Control  as="textarea" rows={3} placeholder="Descrição do serviço" />
                             </Form.Group>
                         )}
-                        {selectPickerValue > 0 && (
-                            <ContainerPrestadores>
-                                
-                            </ContainerPrestadores>
-                        )}
+                        {selectPickerValue 
+                        ? ( <ContainerPrestadores>
+                                <DataTablePrestadores />
+                            </ContainerPrestadores>)
+                        : null
+                        }
                     </Body>
                 </Div>
             }
@@ -107,4 +108,8 @@ const Body = styled.div`
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 
     border-radius: 10px;
     color: black;
+
+    h1{
+        text-align: center;
+    }
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TrashOutline } from 'react-ionicons'
 import ReactDOMServer from 'react-dom/server';
 
-export default function DataTableCarrinho() {
+export default function DataTablePrestadores() {
     const iconHtml = ReactDOMServer.renderToString(<TrashOutline />)
 
     const columns = [

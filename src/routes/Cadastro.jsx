@@ -10,12 +10,14 @@ import axios from 'axios'
 import { simpleModal } from '../components/modais'
 
 export default function Cadastro() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado } = useAuth();
+	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
 
     const [ cepValue, setCepValue ] = useState("") 
     const [ achouCep, setAchouCep ] = useState(false)
     const [ userAddress, setUserAddess ] = useState({})
-
+    const [cadastrarPrestador, setCadastrarPrestador] = useState(false)
+    const [servicoEscolhido, setServicoEscolhido] = useState(false)
+    
     const navigateTo = useNavigate()
 
     const handleCepChange = (event) => {
@@ -51,6 +53,10 @@ export default function Cadastro() {
         })
     }
 
+    const handleCheckBox = async (e) => {
+        setCadastrarPrestador(e.target.checked)
+    }
+
     useEffect(() => {
         if (!telaAcesso) {
             navigateTo('/');
@@ -74,6 +80,8 @@ export default function Cadastro() {
                     bairro: achouCep ? event.target.bairro.value : null,
                     cidade: achouCep ? event.target.cidade.value : null,
                     estado: achouCep ? event.target.estado.value : null,
+                    permission: cadastrarPrestador ? 2 : 1,
+                    servico: cadastrarPrestador ? event.target.cadastroPrestadorInput.value : null,
                 };
                 handleSubmit(formData);
             }}>
@@ -145,21 +153,28 @@ export default function Cadastro() {
                     }
 
 
-                    {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Group className="mb-3" controlId="cadastroPrestador">
                         <Form.Check 
                             type="checkbox" 
-                            label={
-                                    <a 
-                                        href="https://github.com/levymc" 
-                                        target="_blank">Concordar com os <font color={"blue"}>Termos</font>
-                                    </a>
-                                }
+                            label="Cadastrar como Prestador"
+                            onChange={handleCheckBox}
                         />
-                    </Form.Group> */}
-                    <div></div>
+                    </Form.Group>
                     <SubmitBtn variant="primary" type="submit">
                         Cadastrar
                     </SubmitBtn>
+                    {cadastrarPrestador && (
+                                <Form.Group className="mb-3" controlId="cadastroPrestadorInput">
+                                    <Form.Label>Selecione sua categoria de serviços</Form.Label>
+                                    <Form.Select aria-label="Default select example">
+                                        {categorias.map((cat, i) => {
+                                            return (
+                                                <option value={cat.descricao}>{cat.descricao}</option>
+                                            )
+                                        })}
+                                    </Form.Select>
+                                </Form.Group>
+                            )}
                 </SCForm>
 			</Body>
 		</Div>
@@ -205,7 +220,7 @@ const Body = styled.div`
 	gap: 2em;
 
     padding: 4em;
-    width: 80%;
+    width: 100%;
     height: 60%;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 
