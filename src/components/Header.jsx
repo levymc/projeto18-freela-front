@@ -79,7 +79,7 @@ export default function Header() {
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <span onClick={() => console.log(localStorage.getItem("carrinho"))}>Get Serviços</span>
+                    <span onClick={() => console.log(itensCarrinho)}>Get Serviços</span>
                     <SecEsquerda>
                         {location.pathname ==='/'
                                         ? <Tooltip arrow title="Menu">
