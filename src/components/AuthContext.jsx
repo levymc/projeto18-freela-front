@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
     const [isOpen, setIsOpen] = useState(false)
     const [ loggedUser, setLoggedUser ] = useState(null)
 	const [ categorias, setCategorias ] = useState([])
+    const [ itensCarrinho, setItensCarrinho ] = useState([])
 
     return (
         <AuthContext.Provider value={{ 
@@ -15,7 +16,8 @@ export function AuthProvider({ children }) {
                                         logado, setLogado, 
                                         isOpen, setIsOpen, 
                                         loggedUser, setLoggedUser,
-                                        categorias, setCategorias
+                                        categorias, setCategorias,
+                                        itensCarrinho, setItensCarrinho
                                     }}>
         {children}
         </AuthContext.Provider>

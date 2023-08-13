@@ -18,7 +18,13 @@ import { simpleModal } from './modais';
 
 
 export default function Header() {
-    const { telaAcesso, setTelaAcesso, logado, setLogado, isOpen, setIsOpen, loggedUser, setLoggedUser  } = useAuth();
+    const { 
+            telaAcesso, setTelaAcesso, 
+            logado, setLogado, 
+            isOpen, setIsOpen, 
+            loggedUser, setLoggedUser, 
+            itensCarrinho, setItensCarrinho   
+        } = useAuth();
     const [ firstAccess, setFirstAccess ] = useState(false);
     const navigateTo = useNavigate()
 
@@ -73,7 +79,7 @@ export default function Header() {
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <span>Get Serviços</span>
+                    <span onClick={() => console.log(localStorage.getItem("carrinho"))}>Get Serviços</span>
                     <SecEsquerda>
                         {location.pathname ==='/'
                                         ? <Tooltip arrow title="Menu">
@@ -102,11 +108,15 @@ export default function Header() {
                     <SecDireita>
                         { logado 
                             ? <>
-                                <Tooltip arrow title="Carrinho">
+                                <SCTooltip arrow title="Carrinho">
+                                    {itensCarrinho && (itensCarrinho.length > 0  
+                                        ? <section className='cartNumber'>{itensCarrinho.length}</section>
+                                        : null)
+                                    }
                                     <CartIcon
                                         onClick={modalCarrinho}
                                     />
-                                </Tooltip>
+                                </SCTooltip>
                                 <Tooltip arrow title="Deslogar">
                                     <SCLogoutIcon
                                         onClick={handleLogOut}
@@ -142,6 +152,10 @@ export default function Header() {
         </>
     );
 }
+
+const SCTooltip = styled(Tooltip)`
+    position: relative;
+`
 
 const StyledLink = styled(Link)`
     text-decoration: none;

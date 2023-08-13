@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { TrashOutline } from 'react-ionicons'
 import ReactDOMServer from 'react-dom/server';
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext'
 import { simpleModal } from '../modais';
 import axios from 'axios'
@@ -13,7 +14,8 @@ import Tooltip from '@mui/material/Tooltip';
 
 export default function DataTablePrestadores(props) {
     const iconHtml = ReactDOMServer.renderToString(<TrashOutline />)
-	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias, loggedUser, setLoggedUser } = useAuth();
+	const { logado, setLogado, loggedUser, setLoggedUser, itensCarrinho, setItensCarrinho } = useAuth();
+    const navigateTo = useNavigate()
 
     const [prestadores, setPrestadores] = useState()
 
@@ -41,7 +43,9 @@ export default function DataTablePrestadores(props) {
                     headers: {
                         'Authorization': `Bearer ${loggedUser.token}`,
                     }}).then(res => {
-
+                        res.data.categoriaNome = props.categoriaNome
+                        setItensCarrinho([...itensCarrinho, res.data])
+                        navigateTo('/')
                     }).catch(err => {
                         console.error(err.response)
                         simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
@@ -51,7 +55,8 @@ export default function DataTablePrestadores(props) {
             console.error(err)
             simpleModal("Ocorreu algum erro de comunicação com o servidor", "error")
         })
-    };
+    }
+
 
     const columns = [
         {

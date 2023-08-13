@@ -79,6 +79,13 @@ a {
   min-height: 100vh;
 } */
 
+.cartNumber{
+  color: rgb(241, 71, 71) !important;
+  position: absolute;
+  right: -8px;
+  font-size: 16px;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

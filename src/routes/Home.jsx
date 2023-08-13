@@ -13,9 +13,7 @@ import HTMLReactParser from 'html-react-parser';
 
 
 export default function Home() {
-	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias } = useAuth();
-
-
+	const { categorias, setCategorias, itensCarrinho, setItensCarrinho } = useAuth();
 
 	useEffect(() => {
 		axios.get('http://localhost:5000/categorias').then(res => {
@@ -29,6 +27,9 @@ export default function Home() {
 		})
 	}, [])
 	
+	useEffect(() => {
+        localStorage.setItem("carrinho", itensCarrinho)
+	}, [itensCarrinho])
 
 	return (
 		<Div height={'100vh'}>
