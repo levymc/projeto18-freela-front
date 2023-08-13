@@ -89,7 +89,7 @@ const Div = styled.div`
     display: flex;
     justify-content: center;
     overflow-y: auto;
-    width: 100%;
+    width: 50vw;
     min-height: 100vh;
     height: auto;
 	background-color: RGB(0, 26, 61);

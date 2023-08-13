@@ -37,6 +37,11 @@ export default function DataTablePrestadores(props) {
             selector: row => row.email,
         },
         {
+            name: 'Faixa de Preço Diária',
+            selector: row => "R$" + row.precoMin.toFixed(2).replace(".",",") +
+                             " ~ " + "R$" + row.precoMax.toFixed(2).replace(".",",") ,
+        },
+        {
             name: '',
             cell: row => (
                 <IconContainer>
