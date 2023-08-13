@@ -28,7 +28,7 @@ export default function Home() {
 	}, [])
 	
 	useEffect(() => {
-        localStorage.setItem("carrinho", itensCarrinho)
+        localStorage.setItem("carrinho", JSON.stringify(itensCarrinho))
 	}, [itensCarrinho])
 
 	return (

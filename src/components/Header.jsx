@@ -115,7 +115,12 @@ export default function Header() {
                                     }
                                     <CartIcon
                                         onClick={() => {
-                                            modalCarrinho(itensCarrinho)
+                                            modalCarrinho(itensCarrinho).then(res => {
+                                                // apagar do banco o servico solicitado
+                                            }).catch(err => {
+                                                console.error(err)
+                                                simpleModal("Ocorreu algum erro no carrinho, tente novamente", "error")
+                                            })
                                         }}
                                     />
                                 </SCTooltip>
