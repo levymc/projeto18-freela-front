@@ -2,28 +2,31 @@ import DataTable from 'react-data-table-component';
 import styled from 'styled-components';
 import { TrashOutline } from 'react-ionicons'
 import ReactDOMServer from 'react-dom/server';
+import { useAuth } from '../AuthContext';
 
 export default function DataTableCarrinho() {
     const iconHtml = ReactDOMServer.renderToString(<TrashOutline />)
 
+    // const itensCarrinho = ReactDOMServer.renderToString(localStorage.getItem("carrinho"))
+
     const columns = [
         {
-            name: 'Serviços',
+            name: 'Categoria',
             selector: row => row.title,
         },
         {
-            name: 'Valor',
+            name: 'Prestador',
             selector: row => row.year,
         },
         {
-            name: 'Prestador',
+            name: 'Faixa de Preço',
             selector: row => row.prestador,
         },
         {
             name: '',
             cell: row => (
                 <IconContainer>
-                    <StyledTrashIcon color={'red'} />
+                    <StyledTrashIcon onClick={() => console.log(itensCarrinho)} color={'red'} />
                 </IconContainer>
             ),
             width: `2em`

@@ -114,7 +114,9 @@ export default function Header() {
                                         : null)
                                     }
                                     <CartIcon
-                                        onClick={modalCarrinho}
+                                        onClick={() => {
+                                            modalCarrinho(itensCarrinho)
+                                        }}
                                     />
                                 </SCTooltip>
                                 <Tooltip arrow title="Deslogar">

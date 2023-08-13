@@ -2,13 +2,34 @@ import Swal from 'sweetalert2';
 import ReactDOMServer from 'react-dom/server';
 import DataTableCarrinho from './dataTables/DataTableCarrinho';
 
-export const modalCarrinho = () => {
-    const dataTableHtml = ReactDOMServer.renderToString(<DataTableCarrinho />);
+export const modalCarrinho = (itensCarrinho) => {
+    const html = itensCarrinho.length === 0 ? "Você ainda não solicitou nenhum serviço!!"
+                : `<div class="tableCarrinho">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prestador</th>
+                                <th>Categoria Serviço</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itensCarrinho.map((item, i) => `
+                                <tr key=${i}>
+                                    <td>${item.prestadorId}</td>
+                                    <td>${item.categoriaNome}</td>
+                                    <td>${item.preco}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>`
+                    
     
     Swal.fire({
 
         title: "<strong>Serviços Solicitados!</strong>",
-        html: dataTableHtml,
+        html: html,
         confirmButtonColor: `RGB(255, 101, 0)`,
         confirmButtonText: "Finalizar pedido",
         showCloseButton: true,
@@ -17,6 +38,7 @@ export const modalCarrinho = () => {
         allowEscapeKey: false,
         allowOutsideClick: false,
         padding: '1.5em',
+        width: '60vw',
     });
 }
 
