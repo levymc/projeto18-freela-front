@@ -31,6 +31,11 @@ export default function DataTablePrestadores(props) {
                 })
 	}, [])
 
+    const handleContract = (prestadorId, prestadorName) => {
+        const categoriaId = props.categoriaId
+        simpleModal("Deseja solicitar o serviço com o prestador: " + prestadorName, "question")
+    };
+
     const columns = [
         {
             name: 'Prestador',
@@ -48,9 +53,8 @@ export default function DataTablePrestadores(props) {
         {
             name: 'Solicitar Serviço',
             cell: row => (
-                <SCButton>Solicitar</SCButton>
+                <SCButton onClick={() => handleContract(row.id, row.nome)}>Solicitar</SCButton>
             ),
-            // width: `6em`
         },
         {
             name: '',

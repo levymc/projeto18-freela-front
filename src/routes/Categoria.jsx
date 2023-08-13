@@ -50,7 +50,9 @@ export default function Login() {
                         <h1>Serviços de {categoriaServicos.categoria.descricao}</h1>
                         <Form.Group className="mb-3" controlId="selectPicker">
                             <Form.Label>Selecione abaixo, o tipo de serviço desejado</Form.Label>
-                            <Form.Select onChange={(e) => setSelectPickerValue(parseInt(e.target.value))} aria-label="Default select example">
+                            <Form.Select onChange={(e) => {
+                                                            setSelectPickerValue(parseInt(e.target.value))
+                                                        }} aria-label="Default select example">
                                 <option>Selecione um Serviço</option>
                                 {categoriaServicos.servicos.map((servico, i) => {
                                     return (
@@ -68,7 +70,12 @@ export default function Login() {
                         )}
                         {selectPickerValue 
                         ? ( <ContainerPrestadores>
-                                <DataTablePrestadores categoriaId={id} />
+                                <DataTablePrestadores 
+                                    categoriaId={id} 
+                                    categoriaNome = {categoriaServicos.categoria.descricao} 
+                                    servicoIndex = {selectPickerValue}
+                                    servicoNome = {categoriaServicos.servicos}
+                                />
                             </ContainerPrestadores>)
                         : null
                         }
