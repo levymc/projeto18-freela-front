@@ -1,6 +1,9 @@
 import Swal from 'sweetalert2';
 import ReactDOMServer from 'react-dom/server';
 import DataTableCarrinho from './dataTables/DataTableCarrinho';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+
 
 export const simpleModal = (title, icon) => {
     return Swal.fire({
@@ -25,8 +28,15 @@ export const simpleModalCancelar = (title, icon) => {
     })
 }
 
+const handleDeleteService = (data, token) => {
+    return axios.put('http://localhost:5000/cancelarSolicitacao', {data}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }})
+}
 
-export const modalCarrinho = (itensCarrinho) => {
+
+export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
     const html = itensCarrinho.length === 0 ? "Você ainda não solicitou nenhum serviço!!"
                 : `<div class="tableCarrinho">
                     <table>
@@ -49,11 +59,11 @@ export const modalCarrinho = (itensCarrinho) => {
                             `).join('')}
                         </tbody>
                     </table>
-                </div>`
-                    
-    
-    return Swal.fire({
-        title: "<strong>Serviços Solicitados!</strong>",
+                    </div>`
+                        
+        
+        return Swal.fire({
+            title: "<strong>Serviços Solicitados!</strong>",
         html: html,
         confirmButtonColor: `RGB(255, 101, 0)`,
         confirmButtonText: itensCarrinho.length != 0 ? "Finalizar pedido" : "Voltar",
@@ -70,11 +80,19 @@ export const modalCarrinho = (itensCarrinho) => {
                 document.getElementById(itensCarrinho[i].id).addEventListener("click", () => {
                     simpleModalCancelar(`Cancelar solicitação do prestador: ${itensCarrinho[i].prestadorName} ?`, "question").then(res => {
                         if (res.isConfirmed){
-                                
-                            modalCarrinho(itensCarrinho)
+                            handleDeleteService(itensCarrinho[i], token).then(res => {
+                                console.log(res)
+                                if (itensCarrinho.length === 1){
+                                    setItensCarrinho([])
+                                }else{
+                                    setItensCarrinho(itensCarrinho.splice(i, 1))
+                                }
+                            }).catch(err => {
+                                console.error(err.response)
+                            })
+                            
                         }else (modalCarrinho(itensCarrinho))
                     })
-                    console.log(itensCarrinho[i])
                 })
             }
         }

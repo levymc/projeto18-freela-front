@@ -68,6 +68,7 @@ export default function Header() {
         })
     }
 
+
     useEffect(() => {
         if (!firstAccess && !telaAcesso) {
             modalHome(setFirstAccess);
@@ -79,7 +80,7 @@ export default function Header() {
             <HeaderContainer>
                 <SideBar />
                 <DivLogo className="shadow-drop-bottom">
-                    <span onClick={() => console.log(itensCarrinho)}>Get Serviços</span>
+                    <span onClick={() => console.log(itensCarrinho.length)}>Get Serviços</span>
                     <SecEsquerda>
                         {location.pathname ==='/'
                                         ? <Tooltip arrow title="Menu">
@@ -109,13 +110,13 @@ export default function Header() {
                         { logado 
                             ? <>
                                 <SCTooltip arrow title="Carrinho">
-                                    {itensCarrinho && (itensCarrinho.length > 0  
+                                    {itensCarrinho ? (itensCarrinho.length > 0  
                                         ? <section className='cartNumber'>{itensCarrinho.length}</section>
-                                        : null)
+                                        : null) : null
                                     }
                                     <CartIcon
                                         onClick={() => {
-                                            modalCarrinho(itensCarrinho).then(res => {
+                                            modalCarrinho(itensCarrinho, setItensCarrinho, loggedUser.token).then(res => {
                                                 // apagar do banco o servico solicitado
                                             }).catch(err => {
                                                 console.error(err)

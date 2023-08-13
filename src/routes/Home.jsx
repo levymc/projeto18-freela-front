@@ -33,7 +33,7 @@ export default function Home() {
 
 	return (
 		<Div height={'100vh'}>
-			<Body onClick={() => {console.log(iconsList)}}>
+			<Body onClick={() => {console.log(itensCarrinho)}}>
 				{iconsList.map((icon, i) => {
 					return (
 						<SCCardIcons 
