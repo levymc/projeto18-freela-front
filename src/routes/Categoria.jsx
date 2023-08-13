@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { simpleModal } from '../components/modais'
 import ReactLoading from 'react-loading';
+import iconsList from '../components/dto/menuCategoriaIcons';
 
 
 export default function Login() {
@@ -42,14 +43,19 @@ export default function Login() {
             ?  <ReactLoading type="spin" color="white" height={667} width={375} />
             : <Div height={'100vh'}>
                     <Body >
-                        <h1>{categoriaServicos.categoria.descricao}</h1>
+                        <h1>Serviços de {categoriaServicos.categoria.descricao}</h1>
+                        <div>
+                            <span>Selecione abaixo, o tipo de serviço desejado.</span>
+                        </div>
+
                         <Form.Select aria-label="Default select example">
                             <option disabled>Serviços</option>
                             {categoriaServicos.servicos.map((servico, i) => {
                                 return (
-                                    <option value={servico.id}>{servico.descricao}</option>
+                                    <option key={i+1} value={servico.id}>{servico.descricao}</option>
                                 )
                             })}
+                            <option value={0}>Outro...</option>
                         </Form.Select>
                     </Body>
                 </Div>
@@ -59,20 +65,6 @@ export default function Login() {
 	);
 }
 
-const LinkNewAccount = styled(Link)`
-    /* position: absolute; */
-    /* bottom: -10%; */
-    display: flex;
-    justify-content: center;
-    color: #1e1eec !important;
-    width: 15vw;
-    span:hover{
-        color: #8484f7 !important;
-    }
-    span:active{
-        color: #d4d4ff !important;
-    }
-`
 const Div = styled.div`
     display: flex;
     justify-content: center;
@@ -90,10 +82,11 @@ const Body = styled.div`
 	display: flex;
     justify-content: center;
 	flex-wrap: wrap;
+    flex-direction: column;
 	gap: 2em;
 
     padding: 4em;
-    width: 80%;
+    width: 100%;
     height: 60%;
     background-color: RGB(250, 250, 251);
 	box-shadow: 1px 1px 4px 4px rgba(170, 170, 170, 0.212); 

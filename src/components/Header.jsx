@@ -75,7 +75,7 @@ export default function Header() {
                 <DivLogo className="shadow-drop-bottom">
                     <span>Get Serviços</span>
                     <SecEsquerda>
-                        {!telaAcesso 
+                        {location.pathname ==='/'
                                         ? <Tooltip arrow title="Menu">
                                             <SCMenuIcon 
                                                 onClick={() => setIsOpen(!isOpen)} 
