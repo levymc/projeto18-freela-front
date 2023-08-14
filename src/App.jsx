@@ -6,7 +6,7 @@ import Login from './routes/Login'
 import Header from './components/Header';
 import Cadastro from './routes/Cadastro';
 import Categoria from './routes/Categoria'
-import Perfil from './routes/Perfil';
+import Perfil from './routes/Perfil/Perfil';
 
 function App() {
     return (
