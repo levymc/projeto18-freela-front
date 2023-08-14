@@ -20,7 +20,7 @@ export default function CollapsedBtns (props) {
                                 key = {i}
                                 id = {element.idSubBtn}
                                 last = {element.last ? `1px solid #fafafb6c` : '0'}
-                                onClick = {() => navigateTo('/perfil')}
+                                onClick = {() => navigateTo(element.onClick)}
                             >{element.subText}</Button>
                     )
                 })}

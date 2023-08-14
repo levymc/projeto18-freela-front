@@ -44,7 +44,7 @@ export default function Cadastro() {
         if (data.password != data.confirmPassword) return simpleModal("As senhas devem ser iguais.", "warning")
         else if (!data.cidade || !data.endereco) return simpleModal("Busque pelo CEP, clique na lupa", "warning")
 
-        axios.post('http://localhost:5000/signup', data).then(res => {
+        axios.post(`${import.meta.env.VITE_API_URL}/signup`, data).then(res => {
             console.log(res.data)
             simpleModal("Usuário criado com sucesso!", "success").then(() => navigateTo('/login'))
         }).catch(err => {

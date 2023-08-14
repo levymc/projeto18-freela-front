@@ -20,7 +20,7 @@ export default function Perfil() {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"))
-        logado ? axios.get(`http://localhost:5000/user`, {
+        logado ? axios.get(`${import.meta.env.VITE_API_URL}/user`, {
             headers: {
                 'Authorization': `Bearer ${loggedUser.token}`
             }}).then(res => {
@@ -41,13 +41,13 @@ export default function Perfil() {
     }, [logado]);
 
     const handleSubmit = async () => {
-        axios.put('http://localhost:5000/editPerfil', userData.userData, {
+        axios.put(`${import.meta.env.VITE_API_URL}/editPerfil`, userData.userData, {
                     headers: {
                         'Authorization': `Bearer ${loggedUser.token}`
                     }
                 }
             ).then(res => {
-                res.status === 200 && simpleModal('Perfil atualizado com sucesso!', 'success')
+                res.status === 204 && simpleModal('Perfil atualizado com sucesso!', 'success')
             }).catch(err => {
                 console.error(err.response)
                 simpleModal('Ocorreu um erro ao atualizar o perfil', 'error')

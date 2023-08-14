@@ -22,7 +22,7 @@ export default function Login() {
 
     const id = location.pathname.split('/categoria/')[1]
     useEffect(() => {
-        logado && axios.get(`http://localhost:5000/categoria/${id}`, {
+        logado && axios.get(`${import.meta.env.VITE_API_URL}/categoria/${id}`, {
             headers: {
                 'Authorization': `Bearer ${loggedUser.token}`
             }}).then(res => {

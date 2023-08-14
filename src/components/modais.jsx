@@ -51,7 +51,7 @@ export const simpleModalCancelar = (title, icon) => {
 }
 
 const handleDeleteService = (data, token) => {
-    return axios.put('http://localhost:5000/cancelarSolicitacao', {data}, {
+    return axios.put(`${import.meta.env.VITE_API_URL}/cancelarSolicitacao`, {data}, {
         headers: {
             'Authorization': `Bearer ${token}`,
         }})

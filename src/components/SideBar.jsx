@@ -20,11 +20,12 @@ export default function SideBar() {
                     subText: "Meus Dados",
                     onClick: '/perfil',
                 },
-                {
-                    idSubBtn: "Meus pontos",
-                    subText: "Sub Btn1",
-                    last: true
-                },            
+                // {
+                //     idSubBtn: "Meus pontos",
+                //     subText: "Meus Pontos",
+
+                //     last: true
+                // },            
             ],
         },
         {

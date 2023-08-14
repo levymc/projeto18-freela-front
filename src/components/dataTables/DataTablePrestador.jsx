@@ -20,7 +20,7 @@ export default function DataTablePrestadores(props) {
     const [prestadores, setPrestadores] = useState()
 
     useEffect(() => {
-		logado && axios.get('http://localhost:5000/prestadores', {
+		logado && axios.get(`${import.meta.env.VITE_API_URL}/prestadores`, {
             headers: {
                     'Authorization': `Bearer ${loggedUser.token}`,
                     'categoriaId': props.categoriaId
@@ -36,7 +36,7 @@ export default function DataTablePrestadores(props) {
     const handleContract = (prestadorId, prestadorName, price) => {
         simpleModalButton("Deseja solicitar o serviço com o prestador: " + prestadorName, "Confirmar", "question").then(res => {
             if(res.isConfirmed){
-                axios.post('http://localhost:5000/solicitarServico',{
+                axios.post(`${import.meta.env.VITE_API_URL}/solicitarServico`,{
                     categoriaId: props.categoriaId,
                     prestadorId: prestadorId,
                 }, {

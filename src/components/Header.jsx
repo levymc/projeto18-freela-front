@@ -53,20 +53,21 @@ export default function Header() {
     }, [])
 
     const handleLogOut = () => {
-        axios.post('http://localhost:5000/logout', {}, {
+        axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, {
             headers: {
                 'Authorization': `Bearer ${loggedUser.token}`
             }
         }).then(res => {
-            navigateTo('/login')
-            setTelaAcesso(true)
-            setLogado(false)
-            setLoggedUser(null)
+            navigateTo('/login');
+            setTelaAcesso(true);
+            setLogado(false);
+            setLoggedUser(null);
         }).catch(err => {
-            console.error(err.response)
-            simpleModal(err.response.data, "error")
-        })
+            console.error(err.response);
+            simpleModal(err.response.data, "error");
+        });
     }
+    
 
     const handleFinalizarPedido = () => {
         itensCarrinho.length > 0 && simpleModalText("Serviços solicitados com sucesso! Obrigado por confiar em nós!",

@@ -16,7 +16,7 @@ export default function Home() {
 	const { categorias, setCategorias, itensCarrinho, setItensCarrinho } = useAuth();
 
 	useEffect(() => {
-		axios.get('http://localhost:5000/categorias').then(res => {
+		axios.get(`${import.meta.env.VITE_API_URL}/categorias`).then(res => {
 			setCategorias(res.data)
 			iconsList.forEach((icon, i) => {
 				if ( icon.descricao === res.data[i].descricao) return icon.id = res.data[i].id
