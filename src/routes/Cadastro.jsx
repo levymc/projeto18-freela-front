@@ -81,7 +81,7 @@ export default function Cadastro() {
                     cidade: achouCep ? event.target.cidade.value : null,
                     estado: achouCep ? event.target.estado.value : null,
                     permission: cadastrarPrestador ? 2 : 1,
-                    servico: cadastrarPrestador ? event.target.cadastroPrestadorInput.value : "",
+                    servico: cadastrarPrestador ? event.target.cadastroPrestadorInput.value : null,
                 };
                 handleSubmit(formData);
             }}>
@@ -169,7 +169,7 @@ export default function Cadastro() {
                                     <Form.Select aria-label="Default select example">
                                         {categorias.map((cat, i) => {
                                             return (
-                                                <option value={cat.descricao}>{cat.descricao}</option>
+                                                <option value={cat.id}>{cat.descricao}</option>
                                             )
                                         })}
                                     </Form.Select>
