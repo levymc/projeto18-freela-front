@@ -6,6 +6,7 @@ import Login from './routes/Login'
 import Header from './components/Header';
 import Cadastro from './routes/Cadastro';
 import Categoria from './routes/Categoria'
+import Perfil from './routes/Perfil';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/perfil" element={<Perfil />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/categoria/:id" element={<Categoria />} />
                 </Routes>

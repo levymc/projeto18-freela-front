@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Collapse from 'react-bootstrap/Collapse';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function CollapsedBtns (props) {
+
+    const navigateTo = useNavigate()
+    
     return (
         <Collapse in={props.open}>
             <CollapsedDiv id={props.idCollapsed}>
@@ -13,6 +17,7 @@ export default function CollapsedBtns (props) {
                                 key = {i}
                                 id = {element.idSubBtn}
                                 last = {element.last ? `1px solid #fafafb6c` : '0'}
+                                onClick = {() => navigateTo(element.onClick)}
                             >{element.subText}</Button>
                     )
                 })}
