@@ -7,23 +7,34 @@ export default function UserInfoGrid (props){
         <Container>
             <InfoContainer>
                 <Label>Nome:</Label>
-                <Value>{props.userData.nome}</Value>
+                <Value>{props.userData.userData.nome}</Value>
             </InfoContainer>
             <InfoContainer>
                 <Label>Email:</Label>
-                <Value>{props.userData.email}</Value>
+                <Value>{props.userData.userData.email}</Value>
             </InfoContainer>
+
             <InfoContainer>
                 <Label>Endereço:</Label>
-                <Value>{props.userData.endereco}</Value>
+                <Value>{props.userData.userData.endereco}</Value>
             </InfoContainer>
             <InfoContainer>
                 <Label>Número Residência:</Label>
-                <Value>{props.userData.numEnd}</Value>
+                <Value>{props.userData.userData.numEnd}</Value>
+            </InfoContainer>
+
+            <InfoContainer>
+                <Label>Cidade:</Label>
+                <Value>{props.userData.cidade.nome}</Value>
             </InfoContainer>
             <InfoContainer>
+                <Label>Estado:</Label>
+                <Value>{props.userData.estado.uf}</Value>
+            </InfoContainer>
+
+            <InfoContainer>
                 <Label>Tipo da Conta:</Label>
-                <Value>{props.userData.permission === 1 ? "Cliente" : "Prestador"}</Value>
+                <Value>{props.userData.userData.permission === 1 ? "Cliente" : "Prestador"}</Value>
             </InfoContainer>
         </Container>
     )
@@ -32,7 +43,8 @@ export default function UserInfoGrid (props){
 const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1em;
+    gap: 1.6em;
+    font-size: 16px;
 `;
 
 const InfoContainer = styled.div`

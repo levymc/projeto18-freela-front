@@ -39,6 +39,21 @@ export default function Perfil() {
             navigateTo('/');
         }
     }, [logado]);
+
+    const handleSubmit = async () => {
+        axios.put('http://localhost:5000/editPerfil', userData.userData, {
+                    headers: {
+                        'Authorization': `Bearer ${loggedUser.token}`
+                    }
+                }
+            ).then(res => {
+                res.status === 200 && simpleModal('Perfil atualizado com sucesso!', 'success')
+            }).catch(err => {
+                console.error(err.response)
+                simpleModal('Ocorreu um erro ao atualizar o perfil', 'error')
+            })
+    }
+
     
 
     return (
@@ -56,8 +71,16 @@ export default function Perfil() {
                                             <Form.Label>Nome:</Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value={userData && userData.nome}
-                                                onChange={(e) => setUserData({ ...userData, nome: e.target.value })}
+                                                value={userData && userData.userData.nome}
+                                                onChange={(e) =>
+                                                    setUserData((prevUserData) => ({
+                                                        ...prevUserData,
+                                                        userData: {
+                                                            ...prevUserData.userData,
+                                                            nome: e.target.value,
+                                                        },
+                                                    }))
+                                                }                                                
                                             />
                                         </Form.Group>
 
@@ -65,8 +88,16 @@ export default function Perfil() {
                                             <Form.Label>Email:</Form.Label>
                                             <Form.Control
                                                 type="email"
-                                                value={userData && userData.email}
-                                                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                                                value={userData && userData.userData.email}
+                                                onChange={(e) =>
+                                                    setUserData((prevUserData) => ({
+                                                        ...prevUserData,
+                                                        userData: {
+                                                            ...prevUserData.userData,
+                                                            email: e.target.value,
+                                                        },
+                                                    }))
+                                                }
                                             />
                                         </Form.Group>
 
@@ -77,8 +108,16 @@ export default function Perfil() {
                                             <Form.Label>Endereço:</Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                value={userData && userData.endereco}
-                                                onChange={(e) => setUserData({ ...userData, endereco: e.target.value })}
+                                                value={userData && userData.userData.endereco}
+                                                onChange={(e) =>
+                                                    setUserData((prevUserData) => ({
+                                                        ...prevUserData,
+                                                        userData: {
+                                                            ...prevUserData.userData,
+                                                            endereco: e.target.value,
+                                                        },
+                                                    }))
+                                                }
                                             />
                                         </Form.Group>
 
@@ -86,19 +125,34 @@ export default function Perfil() {
                                             <Form.Label>Número Residência:</Form.Label>
                                             <Form.Control
                                                 type="number"
-                                                value={userData && userData.numEnd}
-                                                onChange={(e) => setUserData({ ...userData, numEnd: e.target.value })}
+                                                value={userData && userData.userData.numEnd}
+                                                onChange={(e) =>
+                                                    setUserData((prevUserData) => ({
+                                                        ...prevUserData,
+                                                        userData: {
+                                                            ...prevUserData.userData,
+                                                            numEnd: e.target.value,
+                                                        },
+                                                    }))
+                                                }
                                             />
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" controlId="tipoConta">
                                             <Form.Label>Tipo Conta:</Form.Label>
                                             <Form.Select 
-                                                onChange={(e) => setUserData({ ...userData, permission: parseInt(e.target.value) })}
-                                                aria-label="Default select example"
+                                                onChange={(e) =>
+                                                    setUserData((prevUserData) => ({
+                                                        ...prevUserData,
+                                                        userData: {
+                                                            ...prevUserData.userData,
+                                                            permission: e.target.value,
+                                                        },
+                                                    }))
+                                                }
                                             >
-                                                <option value='1' selected={userData.permission == 1}>Cliente</option>
-                                                <option value='2' selected={userData.permission == 2}>Prestador</option>
+                                                <option value='1' selected={userData.userData.permission == 1}>Cliente</option>
+                                                <option value='2' selected={userData.userData.permission == 2}>Prestador</option>
                                             </Form.Select>
                                         </Form.Group>
                                     </Column>
@@ -113,8 +167,11 @@ export default function Perfil() {
 
                             <SubmitBtn
                                 onClick={(e) => {
-                                    e.preventDefault();
-                                    setIsEditing(!isEditing);
+                                    e.preventDefault()
+                                    setIsEditing(!isEditing)
+                                    if (isEditing) {
+                                        handleSubmit()
+                                    }
                                 }}
                                 variant="primary"
                                 type="submit"
