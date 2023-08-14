@@ -11,7 +11,7 @@ import ReactLoading from 'react-loading';
 import iconsList from '../components/dto/menuCategoriaIcons';
 import DataTablePrestadores from '../components/dataTables/DataTablePrestador';
 
-export default function Login() {
+export default function Categoria() {
 	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias, loggedUser, setLoggedUser } = useAuth();
 
     const [ selectPickerValue, setSelectPickerValue ] = useState(null)

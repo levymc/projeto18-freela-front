@@ -13,7 +13,7 @@ import HTMLReactParser from 'html-react-parser';
 
 
 export default function Home() {
-	const { categorias, setCategorias, itensCarrinho, setItensCarrinho } = useAuth();
+	const { categorias, setCategorias, itensCarrinho, setItensCarrinho } = useAuth()
 
 	useEffect(() => {
 		axios.get(`${import.meta.env.VITE_API_URL}/categorias`).then(res => {
