@@ -2,9 +2,12 @@ import React, { createContext, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Collapse from 'react-bootstrap/Collapse';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+import { simpleModal } from './modais';
+import { useAuth } from '../components/AuthContext';
+import axios from 'axios'
 
 export default function CollapsedBtns (props) {
+	const { telaAcesso, setTelaAcesso, logado, setLogado, categorias, setCategorias, loggedUser, setLoggedUser } = useAuth();
 
     const navigateTo = useNavigate()
     
@@ -17,7 +20,7 @@ export default function CollapsedBtns (props) {
                                 key = {i}
                                 id = {element.idSubBtn}
                                 last = {element.last ? `1px solid #fafafb6c` : '0'}
-                                onClick = {() => navigateTo(element.onClick)}
+                                onClick = {() => navigateTo('/perfil')}
                             >{element.subText}</Button>
                     )
                 })}

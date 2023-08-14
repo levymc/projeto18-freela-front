@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Close, ChevronForwardOutline, ChevronDownOutline } from 'react-ionicons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import CollapsedBtns from './ColapsedBtns';
 import buttons from './dto/buttons';
 
 export default function SideBar() {
+    const { isOpen, setIsOpen } = useAuth();
 
     const buttons = [
         {
@@ -16,7 +17,7 @@ export default function SideBar() {
             subBtns: [
                 {
                     idSubBtn: "Meus dados",
-                    subText: "Meus Daos",
+                    subText: "Meus Dados",
                     onClick: '/perfil',
                 },
                 {
@@ -53,10 +54,26 @@ export default function SideBar() {
         
     ]
 
-    const { isOpen, setIsOpen } = useAuth();
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            const sidebar = document.getElementById("sidebar");
+            
+            if (isOpen && sidebar && !sidebar.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+    
+        document.addEventListener("mousedown", handleOutsideClick);
+    
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, [isOpen, setIsOpen]);
+    
+
 
     return (
-        <SideBarContainer isopen={isOpen ? '0' : '-18em'}>
+        <SideBarContainer id="sidebar" isopen={isOpen ? '0' : '-18em'}>
             <SecIcon>
                 <SCClose
                     onClick={() => setIsOpen(false)}

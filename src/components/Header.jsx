@@ -25,7 +25,7 @@ export default function Header() {
             loggedUser, setLoggedUser, 
             itensCarrinho, setItensCarrinho   
         } = useAuth();
-    const [ firstAccess, setFirstAccess ] = useState(false)
+    const [ firstAccess, setFirstAccess ] = useState(null)
 
     const navigateTo = useNavigate()
 
@@ -104,7 +104,7 @@ export default function Header() {
                                                 <ArrowBackIcon 
                                                     onClick={() => {
                                                         setTelaAcesso(false)
-                                                        modalHome(setFirstAccess);
+                                                        modalHome();
                                                     }
                                                     } 
                                                     height="30px" width="30px"

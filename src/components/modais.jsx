@@ -133,7 +133,7 @@ export const modalCarrinho = (itensCarrinho, setItensCarrinho, token) => {
 }
 
 
-export const modalHome = (setFirstAccess) => {
+export const modalHome = () => {
     Swal.fire({
         title: "Seja bem-vindo(a) ao Get Serviços!",
         text: "Seu lugar de conexões.",
@@ -141,7 +141,7 @@ export const modalHome = (setFirstAccess) => {
         allowEscapeKey: false,
         allowOutsideClick: false,
     }).then(res => {
-        res.isConfirmed && setFirstAccess(true)
+        res.isConfirmed
     })
 }
 

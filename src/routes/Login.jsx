@@ -17,7 +17,7 @@ export default function Login() {
 
     const handleSubmit = (data) => {
         axios.post('http://localhost:5000/signin', data).then(res => {
-            localStorage.setItem(data.userId, data);
+            localStorage.setItem("user", JSON.stringify(res.data));
             setLogado(true)
             setTelaAcesso(false)
             setLoggedUser(res.data);
