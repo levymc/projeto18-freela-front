@@ -96,6 +96,7 @@ export default function Header() {
                                                 onClick={() => setIsOpen(!isOpen)} 
                                                 height="30px" width="30px" 
                                                 color={`#FFF4F4`}
+                                                fontSize='inherit'
                                             />
                                         </Tooltip> 
                                         : <StyledLink to="/">
@@ -107,6 +108,7 @@ export default function Header() {
                                                     }
                                                     } 
                                                     height="30px" width="30px"
+                                                    fontSize='inherit'
                                                     color={`#FFF4F4`}
                                                     cursor={'pointer'}
                                                 />
@@ -123,6 +125,7 @@ export default function Header() {
                                         : null) : null
                                     }
                                     <CartIcon
+                                        fontSize='inherit'
                                         onClick={() => {
                                             modalCarrinho(itensCarrinho, setItensCarrinho, loggedUser.token).then(res => {
                                                 res.isConfirmed && handleFinalizarPedido()
@@ -136,6 +139,7 @@ export default function Header() {
                                 <Tooltip arrow title="Deslogar">
                                     <SCLogoutIcon
                                         onClick={handleLogOut}
+                                        fontSize='inherit'
                                      />
                                 </Tooltip>
                             </>
@@ -144,6 +148,7 @@ export default function Header() {
                                     <Tooltip arrow title="Login">
                                         <PersonIcon 
                                             height="30px" width="30px" 
+                                            fontSize='inherit'
                                             color={`#FFF4F4`}
                                             onClick={() => setTelaAcesso(true)} 
                                         /></Tooltip> 
@@ -153,6 +158,7 @@ export default function Header() {
                         {!logado 
                             && <Tooltip arrow title="Criar conta">
                                 <SCPersonAdd 
+                                    fontSize='inherit'
                                     color = {`#FFF4F4`}
                                     onClick = { () => {
                                         navigateTo('/cadastro')
@@ -212,7 +218,7 @@ const HeaderContainer = styled.div`
 const SecEsquerda = styled.section`
     position: absolute;
     left: 3vw;
-    font-size: 30px;
+    font-size: 40px;
     display: flex;
     align-items: center;
     color:RGB(250, 250, 251);
@@ -220,10 +226,11 @@ const SecEsquerda = styled.section`
 const SecDireita = styled.section`
     position: absolute;
     right: 3vw;
-    font-size: 30px;
+    font-size: 40px;
     display: flex;
     align-items: center;
     color:RGB(250, 250, 251);
+    /* font-size: 2em; */
     align-items: center;
     display: flex;
     justify-content: center;
