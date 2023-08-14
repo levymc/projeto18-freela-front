@@ -16,7 +16,7 @@ export default function Login() {
     const navigateTo = useNavigate()
 
     const handleSubmit = (data) => {
-        axios.post(`${import.meta.env.VITE_API_URL}s/signin`, data).then(res => {
+        axios.post(`${import.meta.env.VITE_API_URL}/signin`, data).then(res => {
             localStorage.setItem("user", JSON.stringify(res.data));
             setLogado(true)
             setTelaAcesso(false)
