@@ -28,30 +28,30 @@ export default function SideBar() {
                 // },            
             ],
         },
-        {
-            text: "Histórico de pedidos",
-            idCollapsed: "btn2",
-        },
-        {
-            text: "Contatos",
-            idCollapsed: "btn2",
-            subBtns: [
-                {
-                    idSubBtn: "subBtn2",
-                    subText: "Sub Btn2"
-                },
-                {
-                    idSubBtn: "subBtn2",
-                    subText: "Sub Btn1"
-                },
-                {
-                    idSubBtn: "subBtn3",
-                    subText: "Sub Btn1",
-                    last: true
-                },
+        // {
+        //     text: "Histórico de pedidos",
+        //     idCollapsed: "btn2",
+        // },
+        // {
+        //     text: "Contatos",
+        //     idCollapsed: "btn2",
+        //     subBtns: [
+        //         {
+        //             idSubBtn: "subBtn2",
+        //             subText: "Sub Btn2"
+        //         },
+        //         {
+        //             idSubBtn: "subBtn2",
+        //             subText: "Sub Btn1"
+        //         },
+        //         {
+        //             idSubBtn: "subBtn3",
+        //             subText: "Sub Btn1",
+        //             last: true
+        //         },
                 
-            ],
-        }
+        //     ],
+        // }
         
     ]
 
